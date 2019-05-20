@@ -11,8 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using test_net_core_mvc.Models.DataBase;
+using src.Repositories.Database;
 
-namespace MvcMovie
+namespace src
 {
     public class Startup
     {
@@ -34,7 +35,13 @@ namespace MvcMovie
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();
+            services.AddDbContext<DataBaseContext>(options =>
+            {
+                options.UseNpgsql(Configuration["ConnectionString"]);
+            });
+            services.AddScoped<DataBaseContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

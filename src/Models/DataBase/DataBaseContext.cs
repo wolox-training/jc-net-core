@@ -1,15 +1,17 @@
+// src/Repositories/Database/DataBaseContext.cs
+
 #region Using
 using Microsoft.EntityFrameworkCore;
-
+using src.Models.Database;
 #endregion
 
-namespace test_net_core_mvc.Models.DataBase
+namespace src.Repositories.Database
 {
     public class DataBaseContext : DbContext
     {
-        public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options){}
+        public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options) {}
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Movie> Movies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

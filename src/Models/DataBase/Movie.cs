@@ -1,14 +1,13 @@
-using System;
-using System.ComponentModel.DataAnnotations;
+// src/Models/Database/Movie.cs
 
-namespace test_net_core_mvc.Models.DataBase
+using System;
+
+namespace src.Models.Database
 {
     public class Movie
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Title { get; set; }
-
-        [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         public string Genre { get; set; }
         public decimal Price { get; set; }
