@@ -9,10 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MvcMovie.Repositories.Database;
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.Models;
-
+using System.Globalization;
 
 namespace src
 {
@@ -28,6 +26,7 @@ namespace src
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -35,8 +34,21 @@ namespace src
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();
+
+            /*/
+            services.AddDbContext<DataBaseContext>(options =>
+            {
+                options.UseNpgsql(Configuration["ConnectionString"]);
+            });
+            services.AddScoped<DataBaseContext>();
+
+            //Internationalization
+            services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
+            services.AddMvc().AddViewLocalization();
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
