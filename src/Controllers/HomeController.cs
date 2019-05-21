@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
+using Microsoft.AspNetCore.Mvc.Localization;
 
 namespace src.Controllers
 {
@@ -25,5 +26,19 @@ namespace src.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        private readonly IHtmlLocalizer<HomeController> _localizer;
+        
+        public HomeController(IHtmlLocalizer<HomeController> localizer)
+        {
+            this._localizer = localizer;
+        }
+        
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = _localizer["ContactPage"];
+            return View();
+        }
+        
     }
 }

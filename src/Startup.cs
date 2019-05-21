@@ -42,13 +42,13 @@ namespace src
             
             services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
             services.AddScoped<DataBaseContext>();
+        
 
             //Internationalization
-            /*
             services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
-            */
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
