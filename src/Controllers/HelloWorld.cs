@@ -7,11 +7,14 @@ namespace src.Controllers
     {
         // 
         // GET: /HelloWorld/
-    /*/public IActionResult Index()
+    public IActionResult Index()
     {
         return View();
-    }   
-    /*/public string Index()
+    } 
+
+    /* 
+    The controller 
+    public string Index()
     {
         return "This is my default action...Hello World";
     }
@@ -23,5 +26,6 @@ namespace src.Controllers
     {
         return "This is the Welcome action method...Hello World!!! (Welcome)";
     }
+    */
     }
 }
