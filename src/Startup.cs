@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using MvcMovie.Repositories.Database;
+using MvcMovie.Models;
 
 namespace src
 {
@@ -34,17 +36,15 @@ namespace src
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //services.AddMvc();
 
-            /*/
-            services.AddDbContext<DataBaseContext>(options =>
-            {
-                options.UseNpgsql(Configuration["ConnectionString"]);
-            });
+            
+            services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
             services.AddScoped<DataBaseContext>();
 
             //Internationalization
+            /*
             services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
