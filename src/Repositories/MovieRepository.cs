@@ -1,41 +1,24 @@
-/*
-using Queries.Core.Domain;
+using Queries.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
+using MvcMovie.Models;
+using System.Linq;
 
-namespace Queries.Core.Repositories
+namespace Queries.Persistence.Repositories
 {
-    public interface IAuthorRepository : IRepository<Author>
+    public class MovieRepository : Repository<Movie>, IMovieRepository
     {
-        Author GetAuthorWithCourses(int id);
+        public MovieRepository(MvcMovieContext context) : base(context)
+        {
+        }
+
+        public Movie GetMovieWithId(int id)
+        {
+            return MvcMovieContext.Movies.Include(m => m.Id).SingleOrDefault(m => m.Id == id);
+        }
+
+        public MvcMovieContext MvcMovieContext
+        {
+            get { return Context as MvcMovieContext; }
+        }
     }
 }
- */
-
- /*
-using Queries.Core.Domain;
-using System.Collections.Generic;
-
-namespace Queries.Core.Repositories
-{
-    public interface ICourseRepository : IRepository<Course>
-    {
-        IEnumerable<Course> GetTopSellingCourses(int count);
-        IEnumerable<Course> GetCoursesWithAuthors(int pageIndex, int pageSize);
-    }
-}
-  */
-/*
-public class ExampleController : Controller
-{
-    private readonly IUnitOfWork _unitOfWork
-
-    public ExampleController(IUnitOfWork unitOfWork)
-    {
-        this._unitOfWork = unitOfWork;
-    }
-    
-    public IUnitOfWork UnitOfWork
-    {
-        get { return this._unitOfWork; }
-    }
-}
- */

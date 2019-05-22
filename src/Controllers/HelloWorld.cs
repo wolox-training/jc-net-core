@@ -1,31 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
+using Queries.Core;
 
 namespace src.Controllers
 {
     public class HelloWorldController : Controller
     {
-        // 
-        // GET: /HelloWorld/
-    public IActionResult Index()
-    {
-        return View();
-    } 
+        private readonly IUnitOfWork _unitOfWork;
 
-    /* 
-    The controller 
-    public string Index()
-    {
-        return "This is my default action...Hello World";
-    }
-
-    // 
-    // GET: /HelloWorld/Welcome/ 
-
-    public string Welcome()
-    {
-        return "This is the Welcome action method...Hello World!!! (Welcome)";
-    }
-    */
+        public HelloWorldController(IUnitOfWork unitOfWork)
+        {
+            this._unitOfWork = unitOfWork;
+        }
+    
+        public IUnitOfWork UnitOfWork
+        {
+            get { return this._unitOfWork; }
+        }
+        public IActionResult Index()
+        {
+            return View();
+        } 
     }
 }

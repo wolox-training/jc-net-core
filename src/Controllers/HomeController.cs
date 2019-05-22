@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Queries.Core;
 
 namespace src.Controllers
 {
@@ -34,6 +35,5 @@ namespace src.Controllers
             ViewData["Message"] = _localizer["PrivacyPage"];
             return View();
         }
-
     }
 }

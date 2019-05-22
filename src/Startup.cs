@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using MvcMovie.Repositories.Database;
 using MvcMovie.Models;
+using Queries.Core;
+using Queries.Persistence;
 
 namespace src
 {
@@ -36,9 +38,8 @@ namespace src
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //services.AddMvc();
-
             
             services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
             services.AddScoped<DataBaseContext>();
@@ -51,6 +52,8 @@ namespace src
             var culture = new CultureInfo("fr-FR");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             
         }
 
