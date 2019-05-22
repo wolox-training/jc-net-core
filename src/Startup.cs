@@ -35,6 +35,7 @@ namespace src
             });
 
             services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             
         }
 
