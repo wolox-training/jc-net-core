@@ -16,11 +16,6 @@ namespace src.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -34,11 +29,11 @@ namespace src.Controllers
             this._localizer = localizer;
         }
         
-        public IActionResult Contact()
+        public IActionResult Privacy()
         {
-            ViewData["Message"] = _localizer["ContactPage"];
+            ViewData["Message"] = _localizer["PrivacyPage"];
             return View();
         }
-        
+
     }
 }

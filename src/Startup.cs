@@ -47,7 +47,10 @@ namespace src
             //Internationalization
             services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
-            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            //CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
+            var culture = new CultureInfo("fr-FR");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
             
         }
 
