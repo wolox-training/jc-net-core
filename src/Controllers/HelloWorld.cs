@@ -5,18 +5,18 @@ namespace src.Controllers
 {
     public class HelloWorldController : Controller
     {
-        // 
-        // GET: /HelloWorld/
-    /*/public IActionResult Index()
+    // GET: /HelloWorld/
+    /*
+    public IActionResult Index()
     {
         return View();
     }   
-    /*/public string Index()
+    */
+    public string Index()
     {
         return "This is my default action...Hello World";
     }
 
-    // 
     // GET: /HelloWorld/Welcome/ 
 
     public string Welcome()
