@@ -4,11 +4,11 @@ using Queries.Core;
 
 namespace src.Controllers
 {
-    public class HelloWorldController : Controller
+    public class MovieAppController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public HelloWorldController(IUnitOfWork unitOfWork)
+        public MovieAppController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
@@ -18,6 +18,11 @@ namespace src.Controllers
             get { return this._unitOfWork; }
         }
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Create()
         {
             return View();
         } 
