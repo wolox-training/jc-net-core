@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
 using MvcMovie.Repositories.DataBase;
-using MvcMovie.Models;
 
 namespace src
 {
@@ -43,13 +36,6 @@ namespace src
             
             services.AddDbContext<MvcMovieContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
             services.AddScoped<MvcMovieContext>();
-
-            //Internationalization
-            /*
-            services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc().AddViewLocalization();
-            CultureInfo.CurrentCulture = new CultureInfo("en-US");
-            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
