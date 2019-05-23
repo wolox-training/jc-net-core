@@ -13,12 +13,11 @@ namespace Queries.Persistence
         public UnitOfWork(MvcMovieContext context)
         {
             _context = context;
-            Courses = new MovieRepository(_context);
+            Movies = new MovieRepository(_context);
         }
 
-        public IMovieRepository Courses { get; private set; }
+        public IMovieRepository Movies { get; private set; }
 
-        public IMovieRepository Movies => throw new System.NotImplementedException();
 
         public int Complete()
         {
