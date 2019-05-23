@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace MvcMovie.Models
+namespace MvcMovie.Repositories.DataBase
 {
     public class MvcMovieContext : DbContext
     {
@@ -13,6 +13,6 @@ namespace MvcMovie.Models
         {
         }
 
-        public DbSet<MvcMovie.Models.Movie> Movie { get; set; }
+        public DbSet<MvcMovie.Models.Movie> Movies { get; set; }
     }
 }

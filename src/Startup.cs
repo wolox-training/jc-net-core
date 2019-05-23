@@ -11,8 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using MvcMovie.Repositories.Database;
 using MvcMovie.Models;
+using Queries.Core;
+using Queries.Persistence;
+using MvcMovie.Repositories.DataBase;
 
 namespace src
 {
@@ -36,19 +38,23 @@ namespace src
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //services.AddMvc();
-
             
-            services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
-            services.AddScoped<DataBaseContext>();
+            services.AddDbContext<MvcMovieContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
+            services.AddScoped<MvcMovieContext>();
+        
 
             //Internationalization
-            /*
             services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
-            CultureInfo.CurrentCulture = new CultureInfo("en-US");
-            */
+            //CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
+            var culture = new CultureInfo("fr-FR");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
