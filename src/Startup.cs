@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using MvcMovie.Repositories.Database;
+using MvcMovie.Repositories.DataBase;
 using MvcMovie.Models;
 
 namespace src
@@ -41,8 +41,8 @@ namespace src
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             
-            services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
-            services.AddScoped<DataBaseContext>();
+            services.AddDbContext<MvcMovieContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
+            services.AddScoped<MvcMovieContext>();
 
             //Internationalization
             /*
