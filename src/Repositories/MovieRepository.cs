@@ -12,9 +12,9 @@ namespace Queries.Persistence.Repositories
         {
         }
 
-        public Movie GetMovieWithId(int id)
+        public Movie GetMovieWithGenre(string genre)
         {
-            return MvcMovieContext.Movies.Include(m => m.Id).SingleOrDefault(m => m.Id == id);
+            return MvcMovieContext.Movies.Include(g => g.Genre).SingleOrDefault(g => g.Genre == genre);
         }
 
         public MvcMovieContext MvcMovieContext
