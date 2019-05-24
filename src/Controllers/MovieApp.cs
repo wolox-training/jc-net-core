@@ -1,11 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
 using Queries.Core;
-using Queries.Persistence.Repositories;
-using System.Threading.Tasks;
-using System;
-using System.Collections.ObjectModel;
 using MvcMovie.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MvcMovie.Controllers
 {
@@ -38,6 +34,33 @@ namespace MvcMovie.Controllers
         {
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
+            return RedirectPermanent("/MovieApp");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var movie = UnitOfWork.Movies.Get(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        {
+            if (id != movie.Id)
+            {
+                return NotFound();
+            } 
+            else if (ModelState.IsValid)
+            {
+                UnitOfWork.Movies.Update(movie);
+                UnitOfWork.Complete();
+            }
             return RedirectPermanent("/MovieApp");
         }
     }
