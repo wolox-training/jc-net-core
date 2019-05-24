@@ -1,0 +1,8 @@
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <h1>Are you sure?</h1>
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
