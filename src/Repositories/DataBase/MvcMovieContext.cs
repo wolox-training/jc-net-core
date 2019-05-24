@@ -8,7 +8,7 @@ namespace MvcMovie.Repositories.DataBase
 {
     public class MvcMovieContext : DbContext
     {
-        public MvcMovieContext (DbContextOptions<MvcMovieContext> options){}
+        public MvcMovieContext (DbContextOptions<MvcMovieContext> options): base(options){}
 
         public DbSet<MvcMovie.Models.Movie> Movies { get; set; }
     }

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
 using Queries.Core;
+using MvcMovie.Models;
 
-namespace src.Controllers
+namespace MvcMovie.Controllers
 {
     public class MovieAppController : Controller
     {
@@ -12,7 +12,6 @@ namespace src.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
-    
         public IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
@@ -22,9 +21,18 @@ namespace src.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
-        } 
+        }
+
+        [HttpPost]
+        public IActionResult Create(Movie movie)
+        {
+            UnitOfWork.Movies.Add(movie);
+            UnitOfWork.Complete();
+            return View();
+        }
     }
 }
