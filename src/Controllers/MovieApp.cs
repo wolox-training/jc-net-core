@@ -24,7 +24,7 @@ namespace MvcMovie.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(UnitOfWork.Movies.GetAll());
         }
 
         [HttpGet]
@@ -38,7 +38,7 @@ namespace MvcMovie.Controllers
         {
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
-            return View();
+            return RedirectPermanent("/MovieApp");
         }
     }
 }
