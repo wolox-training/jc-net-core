@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Queries.Core;
+using Microsoft.AspNetCore.Authorization;
 
 namespace src.Controllers
 {
@@ -30,6 +31,7 @@ namespace src.Controllers
             this._localizer = localizer;
         }
         
+        [Authorize]
         public IActionResult Privacy()
         {
             ViewData["Message"] = _localizer["PrivacyPage"];

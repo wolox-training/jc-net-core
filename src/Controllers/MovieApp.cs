@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Queries.Core;
 using MvcMovie.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMovie.Controllers
 {
+
+    [Authorize]
     public class MovieAppController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
