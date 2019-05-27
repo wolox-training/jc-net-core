@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MvcMovie.Repositories.DataBase;
+using MvcMovie.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace src.Migrations
