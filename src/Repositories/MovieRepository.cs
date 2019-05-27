@@ -2,7 +2,6 @@ using Queries.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
 using System.Linq;
-using MvcMovie.Repositories.DataBase;
 
 namespace Queries.Persistence.Repositories
 {
