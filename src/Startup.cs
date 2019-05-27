@@ -14,7 +14,6 @@ using System.Globalization;
 using MvcMovie.Models;
 using Queries.Core;
 using Queries.Persistence;
-using MvcMovie.Repositories.DataBase;
 
 namespace src
 {

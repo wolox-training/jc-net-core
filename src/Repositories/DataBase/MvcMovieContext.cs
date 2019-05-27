@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace MvcMovie.Repositories.DataBase
+namespace MvcMovie.Models
 {
     public class MvcMovieContext : DbContext
     {
         public MvcMovieContext (DbContextOptions<MvcMovieContext> options): base(options){}
 
-        public DbSet<MvcMovie.Models.Movie> Movies { get; set; }
+        public DbSet<Movie> Movies { get; set; }
     }
 }
