@@ -11,7 +11,7 @@ namespace MvcMovie.Models
 {
     public class MvcMovieContext : IdentityDbContext<IdentityUser>
     {
-        public MvcMovieContext (DbContextOptions<MvcMovieContext> options): base(options){}
+        public MvcMovieContext (DbContextOptions<MvcMovieContext> options): base(options) {}
 
         public DbSet<Movie> Movies { get; set; }
     }
