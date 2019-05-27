@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
 #endregion
 
-namespace MvcMovie.Repositories.Database
+namespace MvcMovie.Repositories.DataBase
 {
     public class DataBaseContext : DbContext
     {

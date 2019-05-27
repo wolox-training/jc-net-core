@@ -5,11 +5,10 @@ namespace src.Controllers
 {
     public class HelloWorldController : Controller
     {
-        
-    public IActionResult Index()
-    {
-        return View();
-    } 
-
+  
+        public IActionResult Index()
+        {
+            return View();
+        } 
     }
 }
