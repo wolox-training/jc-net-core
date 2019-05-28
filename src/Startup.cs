@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Repositories.DataBase;
-using MvcMovie.Models;
 
 namespace src
 {
@@ -32,6 +31,9 @@ namespace src
             services.AddMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            
+            services.AddDbContext<MvcMovieContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
+            services.AddScoped<MvcMovieContext>();
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
