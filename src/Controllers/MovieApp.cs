@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
 using Queries.Core;
 using Queries.Persistence.Repositories;
 using System.Threading.Tasks;
@@ -17,7 +16,6 @@ namespace MvcMovie.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
-    
         public IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
