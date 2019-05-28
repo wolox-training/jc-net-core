@@ -26,5 +26,10 @@ namespace Queries.Persistence.Repositories
         {
             return MvcMovieContext.Movies.Where(m => m.Title.Contains(searchString));
         }
+
+        public IEnumerable<Movie> GetMoviesIntersection(IEnumerable<Movie> movie1, IEnumerable<Movie> movie2)
+        {
+            return movie1.Intersect(movie2);
+        }
     }
 }

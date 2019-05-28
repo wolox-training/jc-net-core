@@ -4,6 +4,8 @@ using MvcMovie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcMovie.Controllers
 {
@@ -22,21 +24,35 @@ namespace MvcMovie.Controllers
         {
             get { return this._unitOfWork; }
         }
-        /*public IActionResult Index()
-        {
-            //return View(UnitOfWork.Movies.GetMovieWithGenre("Raro"));
-            //return View(UnitOfWork.Movies.GetMovieWithPartTitle("Gan"));
-        }
-        */
-        public IActionResult Index(string searchString)
+        public IActionResult Index(string movieGenre, string searchString)
         {
             var movies = UnitOfWork.Movies.GetAll();
+            //IEnumerable<Movie> moviesG;
             if (!String.IsNullOrEmpty(searchString))
             {
                 movies = UnitOfWork.Movies.GetMovieWithPartTitle(searchString);
             }
-
+            /*
+            if (!string.IsNullOrEmpty(movieGenre))
+            {
+                moviesG = UnitOfWork.Movies.GetMovieWithGenre(movieGenre);
+            }else{
+                moviesG = null;
+            }
+            movies = UnitOfWork.Movies.GetMoviesIntersection(movies,moviesG);
+            var movieGenreVM = new MovieGenreViewModel
+            {
+                Genres = new SelectList("Raro"),
+                Movies = movies
+            };
+            */
             return View(movies);
+        }
+
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         [HttpGet]
