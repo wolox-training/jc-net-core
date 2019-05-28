@@ -7,6 +7,5 @@ namespace Queries.Core.Repositories
     {
         IEnumerable<Movie> GetMovieWithGenre(string genre);
         IEnumerable<Movie> GetMovieWithPartTitle(string searchString);
-        IEnumerable<Movie> GetMoviesIntersection(IEnumerable<Movie> movie1, IEnumerable<Movie> movie2);
     }
 }

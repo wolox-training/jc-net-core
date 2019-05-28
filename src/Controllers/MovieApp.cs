@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 
 namespace MvcMovie.Controllers
 {
@@ -27,26 +28,25 @@ namespace MvcMovie.Controllers
         public IActionResult Index(string movieGenre, string searchString)
         {
             var movies = UnitOfWork.Movies.GetAll();
-            //IEnumerable<Movie> moviesG;
-            if (!String.IsNullOrEmpty(searchString))
+
+            if (!string.IsNullOrEmpty(searchString))
             {
-                movies = UnitOfWork.Movies.GetMovieWithPartTitle(searchString);
+                movies = movies.Where(s => s.Title.Contains(searchString));
             }
-            /*
+
             if (!string.IsNullOrEmpty(movieGenre))
             {
-                moviesG = UnitOfWork.Movies.GetMovieWithGenre(movieGenre);
-            }else{
-                moviesG = null;
+                movies = movies.Where(x => x.Genre == movieGenre);
             }
-            movies = UnitOfWork.Movies.GetMoviesIntersection(movies,moviesG);
+
+            var genresquery = movies.Select(m => m.Genre).ToArray();
             var movieGenreVM = new MovieGenreViewModel
             {
-                Genres = new SelectList("Raro"),
-                Movies = movies
+                Genres = new SelectList(genresquery.Distinct().ToList()),
+                Movies = movies.ToList()
             };
-            */
-            return View(movies);
+
+            return View(movieGenreVM);
         }
 
         [HttpPost]
