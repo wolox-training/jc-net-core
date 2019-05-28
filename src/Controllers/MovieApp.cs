@@ -3,6 +3,7 @@ using Queries.Core;
 using MvcMovie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace MvcMovie.Controllers
 {
@@ -21,9 +22,21 @@ namespace MvcMovie.Controllers
         {
             get { return this._unitOfWork; }
         }
-        public IActionResult Index()
+        /*public IActionResult Index()
         {
-            return View(UnitOfWork.Movies.GetAll());
+            //return View(UnitOfWork.Movies.GetMovieWithGenre("Raro"));
+            //return View(UnitOfWork.Movies.GetMovieWithPartTitle("Gan"));
+        }
+        */
+        public IActionResult Index(string searchString)
+        {
+            var movies = UnitOfWork.Movies.GetAll();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = UnitOfWork.Movies.GetMovieWithPartTitle(searchString);
+            }
+
+            return View(movies);
         }
 
         [HttpGet]
