@@ -24,31 +24,26 @@
         </tr>
     </thead>
     <tbody>
-@if (Model != null)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Genre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Rating)
-        </td>
-    </tr>
-}
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Rating)
+            </td>
+        </tr>
     </tbody>
 </table>
-<p>
-     @Html.ActionLink("Back to List", "Index")
-</p>
+@Html.ActionLink("Back to List", "Index")
