@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
-using Queries.Core;
+using MvcMovie.Repositories.Interfaces;
 
 namespace src.Controllers
 {
@@ -14,6 +14,7 @@ namespace src.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Message"] = _localizer["PrivacyPage"];
             return View();
         }
 
@@ -24,15 +25,11 @@ namespace src.Controllers
         }
 
         private readonly IHtmlLocalizer<HomeController> _localizer;
-        
-        public HomeController(IHtmlLocalizer<HomeController> localizer)
-        {
-            this._localizer = localizer;
-        }
-        
+
+        public HomeController(IHtmlLocalizer<HomeController> localizer) => this._localizer = localizer;
+
         public IActionResult Privacy()
         {
-            ViewData["Message"] = _localizer["PrivacyPage"];
             return View();
         }
     }
