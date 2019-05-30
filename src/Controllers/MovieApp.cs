@@ -15,7 +15,7 @@ namespace MovieApp.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
-    
+        
         public IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
