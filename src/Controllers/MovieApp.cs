@@ -66,11 +66,16 @@ namespace MovieApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Movie movie)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("ID,Title,ReleaseDate,Genre,Price, Rating")]Movie movie)
         {
-            UnitOfWork.Movies.Add(movie);
-            UnitOfWork.Complete();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                UnitOfWork.Movies.Update(movie);
+                UnitOfWork.Complete();
+                return RedirectToAction("Index");
+            }
+            return View(movie);
         }
 
         [HttpGet]
@@ -88,16 +93,13 @@ namespace MovieApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            } 
-            else
+            if (ModelState.IsValid)
             {
                 UnitOfWork.Movies.Update(movie);
                 UnitOfWork.Complete();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(movie);
         }
 
         [HttpGet]
