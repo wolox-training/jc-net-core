@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Queries.Core;
+using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
 
-namespace MvcMovie.Controllers
+namespace MovieApp.Controllers
 {
     public class MovieAppController : Controller
     {
@@ -12,10 +12,13 @@ namespace MvcMovie.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
+        
         public IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View();

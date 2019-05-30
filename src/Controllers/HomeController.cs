@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
-using Queries.Core;
 
-namespace src.Controllers
+namespace MvcMovie.Controllers
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
+            ViewData["Message"] = _localizer["HomePage"];
             return View();
         }
 
@@ -29,11 +25,7 @@ namespace src.Controllers
         {
             this._localizer = localizer;
         }
-        
-        public IActionResult Privacy()
-        {
-            ViewData["Message"] = _localizer["PrivacyPage"];
-            return View();
-        }
+
+        public IActionResult Privacy() => View();
     }
 }
