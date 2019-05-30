@@ -1,7 +1,6 @@
-using Queries.Core.Repositories;
 using System;
 
-namespace Queries.Core
+namespace MvcMovie.Repositories.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MvcMovie.Models;
 
-namespace Queries.Core.Repositories
+namespace MvcMovie.Repositories.Interfaces
 {
     public interface IMovieRepository : IRepository<Movie>
     {

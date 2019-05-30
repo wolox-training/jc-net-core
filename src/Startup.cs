@@ -14,8 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using MvcMovie.Models;
-using Queries.Core;
-using Queries.Persistence;
+using MvcMovie.Repositories.Interfaces;
 
 namespace src
 {
@@ -46,10 +45,8 @@ namespace src
             services.AddScoped<MvcMovieContext>();
         
 
-            //Internationalization
             services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
-            //CultureInfo.CurrentCulture = new CultureInfo("fr-FR");
             var culture = new CultureInfo("fr-FR");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
