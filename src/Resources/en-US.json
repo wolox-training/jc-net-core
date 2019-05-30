@@ -1,5 +1,6 @@
 {
     "DescriptionPage": "Your application description page.",
     "PrivacyPage": "Your privacy page.",
-    "HomePage": "Home Page"
+    "HomePage": "Home Page",
+    "DeleteQuestion":"Are you sure?"
 }
