@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Queries.Core;
+using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MvcMovie.Controllers
+namespace MovieApp.Controllers
 {
     public class MovieAppController : Controller
     {
@@ -13,10 +13,13 @@ namespace MvcMovie.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
+
         public IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View(UnitOfWork.Movies.GetAll());
@@ -33,7 +36,7 @@ namespace MvcMovie.Controllers
         {
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
-            return RedirectPermanent("/MovieApp");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -60,7 +63,7 @@ namespace MvcMovie.Controllers
                 UnitOfWork.Movies.Update(movie);
                 UnitOfWork.Complete();
             }
-            return RedirectPermanent("/MovieApp");
+            return RedirectToAction("Index");
         }
     }
 }
