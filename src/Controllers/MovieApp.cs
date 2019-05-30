@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Queries.Core;
+using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
 using Microsoft.EntityFrameworkCore;
+using src.Models;
+using System.Diagnostics;
 
-namespace MvcMovie.Controllers
+namespace MovieApp.Controllers
 {
     public class MovieAppController : Controller
     {
@@ -18,6 +20,8 @@ namespace MvcMovie.Controllers
         {
             get { return this._unitOfWork; }
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View(UnitOfWork.Movies.GetAll());
@@ -34,7 +38,7 @@ namespace MvcMovie.Controllers
         {
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
-            return RedirectPermanent("/MovieApp");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -52,16 +56,16 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
         {
-            if (id != movie.Id)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             } 
-            else if (ModelState.IsValid)
+            else
             {
                 UnitOfWork.Movies.Update(movie);
                 UnitOfWork.Complete();
             }
-            return RedirectPermanent("/MovieApp");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
