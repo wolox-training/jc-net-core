@@ -1,6 +1,12 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization;
+@inject IViewLocalizer Localizer;
+@{
+    ViewData["Question"] = Localizer["DeleteQuestion"];
+}
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    <h1>Are you sure?</h1>
+    <h1>@ViewData["Question"]</h1>
     <p>
         <input type="submit" value="Delete" /> |
         @Html.ActionLink("Back to List", "Index")
