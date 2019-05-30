@@ -7,6 +7,8 @@
 <h2>Movie App</h2>
 <a asp-action="Create">Create New</a>
 
+@if (Model != null)
+{
 <table class="table">
     <thead>
         <tr>
@@ -26,9 +28,7 @@
         </tr>
     </thead>
     <tbody>
-@if (Model != null)
-{
-    foreach (var item in Model) {
+    @foreach (var item in Model) {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
@@ -49,6 +49,6 @@
                 </td>
             </tr>
     }
-}
     </tbody>
 </table>
+}
