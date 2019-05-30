@@ -1,9 +1,9 @@
-using Queries.Core.Repositories;
+using MvcMovie.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
 using System.Linq;
 
-namespace Queries.Persistence.Repositories
+namespace MvcMovie.Repositories
 {
     public class MovieRepository : Repository<Movie>, IMovieRepository
     {

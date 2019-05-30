@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Queries.Core.Repositories;
+using MvcMovie.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Queries.Persistence.Repositories
+namespace MvcMovie.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
