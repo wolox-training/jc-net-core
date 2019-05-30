@@ -20,11 +20,8 @@ namespace MvcMovie.Controllers
         }
 
         private readonly IHtmlLocalizer<HomeController> _localizer;
-        
-        public HomeController(IHtmlLocalizer<HomeController> localizer)
-        {
-            this._localizer = localizer;
-        }
+
+        public HomeController(IHtmlLocalizer<HomeController> localizer) => this._localizer = localizer;
 
         public IActionResult Privacy() => View();
     }
