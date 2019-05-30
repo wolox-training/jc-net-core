@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
 using MvcMovie.Repositories.Interfaces;
 
-namespace src.Controllers
+namespace MvcMovie.Controllers
 {
     public class HomeController : Controller
     {
