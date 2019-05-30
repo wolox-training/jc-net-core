@@ -1,9 +1,8 @@
-using Queries.Core;
-using Queries.Core.Repositories;
-using Queries.Persistence.Repositories;
+using MvcMovie.Repositories;
+using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
 
-namespace Queries.Persistence
+namespace MvcMovie.Models
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
-using Queries.Core;
+using MvcMovie.Repositories.Interfaces;
 
-namespace src.Controllers
+namespace MvcMovie.Controllers
 {
     public class HelloWorldController : Controller
     {

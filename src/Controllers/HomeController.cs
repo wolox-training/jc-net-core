@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
-using Queries.Core;
 
-namespace src.Controllers
+namespace MvcMovie.Controllers
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
+            ViewData["Message"] = _localizer["HomePage"];
             return View();
         }
 
@@ -24,16 +24,9 @@ namespace src.Controllers
         }
 
         private readonly IHtmlLocalizer<HomeController> _localizer;
-        
-        public HomeController(IHtmlLocalizer<HomeController> localizer)
-        {
-            this._localizer = localizer;
-        }
-        
-        public IActionResult Privacy()
-        {
-            ViewData["Message"] = _localizer["PrivacyPage"];
-            return View();
-        }
+
+        public HomeController(IHtmlLocalizer<HomeController> localizer) => this._localizer = localizer;
+
+        public IActionResult Privacy() => View();
     }
 }
