@@ -3,29 +3,42 @@
     ViewData["Title"] = "Details";
 }
 
-@if (Model != null)
-{
-    <table class="table">
-        @Html.Partial("../Shared/_HeaderListMovies")
-        <tbody>
+<table class="table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.Price)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
         </tr>
-        </tbody>
-    </table>
-}
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Genre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Price)
+        </td>
+    </tr>
+    </tbody>
+</table>
 @Html.ActionLink("Back to List", "Index")

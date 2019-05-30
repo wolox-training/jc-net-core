@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
-using Microsoft.EntityFrameworkCore;
 using src.Models;
 using System.Diagnostics;
 
