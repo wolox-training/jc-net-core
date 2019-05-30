@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using src.Models;
 using System.Diagnostics;
 
-namespace MvcMovie.Controllers
+namespace MovieApp.Controllers
 {
 
     [Authorize]
@@ -18,7 +18,7 @@ namespace MvcMovie.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
-    
+        
         public IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
