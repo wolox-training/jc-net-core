@@ -21,11 +21,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
         </tr>
     </thead>
     <tbody>
-@if (Model != null)
-{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => modelItem.Id)
@@ -46,9 +47,6 @@
             @Html.DisplayFor(modelItem => modelItem.Rating)
         </td>
     </tr>
-}
     </tbody>
 </table>
-<p>
-     @Html.ActionLink("Back to List", "Index")
-</p>
+@Html.ActionLink("Back to List", "Index")

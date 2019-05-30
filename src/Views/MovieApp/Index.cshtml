@@ -16,6 +16,8 @@
         <input type="submit" value="Filter" />
     </p>
 </form>
+@if (Model != null)
+{
 <table class="table">
     <thead>
         <tr>
@@ -65,3 +67,4 @@
         }
     </tbody>
 </table>
+}
