@@ -29,9 +29,37 @@ namespace MovieApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(string movieGenre, string searchString)
+        public IActionResult Index(string movieGenre, string searchString, string sortOrder)
         {
+            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Title" : "";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Price" : "";
+            ViewData["GenreSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Genre" : "";
+            ViewData["RatingSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Rating" : "";
+
             var movies = UnitOfWork.Movies.GetAll();
+
+            switch (sortOrder)
+            {
+                case "Title":
+                    movies = movies.OrderByDescending(m => m.Title);
+                    break;
+                case "Date":
+                    movies = movies.OrderBy(m => m.ReleaseDate);
+                    break;
+                case "Price":
+                    movies = movies.OrderBy(m => m.Price);
+                    break;
+                case "Genre":
+                    movies = movies.OrderBy(m => m.Genre);
+                    break;
+                case "Rating":
+                    movies = movies.OrderBy(m => m.Rating);
+                    break;
+                default:
+                    movies = movies.OrderBy(m => m.Title);
+                    break;
+            }
 
             if (!string.IsNullOrEmpty(searchString))
             {
