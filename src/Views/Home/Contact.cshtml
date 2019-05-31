@@ -1,0 +1,14 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization;
+
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["ContactPage"];
+    ViewData["Message"] = Localizer["ContactMessage"];
+}
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+    <p>@ViewData["Message"]</p>
+    <p>Testing Mail</p>
+</div>

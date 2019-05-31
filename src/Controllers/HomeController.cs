@@ -27,5 +27,9 @@ namespace MvcMovie.Controllers
 
         [Authorize]
         public IActionResult Privacy() => View();
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }

@@ -2,5 +2,7 @@
     "DescriptionPage": "Página de descripción de su aplicación",
     "PrivacyPage": "Página de privacidad",
     "HomePage": "Página de inicio",
-    "DeleteQuestion": "¿Está seguro?"
+    "DeleteQuestion": "¿Está seguro?",
+    "ContactPage": "Hola, yo soy Garfield",
+    "ContactMessage": "Está es mi primera aplicación, espero les guste"
 }
