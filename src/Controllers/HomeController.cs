@@ -4,6 +4,8 @@ using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
 using MvcMovie.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
+using System.Net;
 
 namespace MvcMovie.Controllers
 {
@@ -27,8 +29,20 @@ namespace MvcMovie.Controllers
 
         [Authorize]
         public IActionResult Privacy() => View();
+
         public IActionResult Contact()
         {
+            SmtpClient client = new SmtpClient("smtp.mailtrap.io");
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("6005220a480d62", "6531177fbc4017");
+            client.Port=587;
+            
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("559eeb2ac5-e0bff9@inbox.mailtrap.io");
+            mailMessage.To.Add("marcos.trucco@wolox.com.ar");
+            mailMessage.Body = "Don't Worry, be Happy";
+            mailMessage.Subject = "Mail Test";
+            client.Send(mailMessage);
             return View();
         }
     }

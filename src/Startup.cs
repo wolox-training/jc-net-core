@@ -83,7 +83,7 @@ namespace src
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<MvcMovieContext>();
-            
+
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
