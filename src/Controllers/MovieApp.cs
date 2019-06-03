@@ -45,16 +45,16 @@ namespace MovieApp.Controllers
                     movies = movies.OrderByDescending(m => m.Title);
                     break;
                 case "Date":
-                    movies = movies.OrderBy(m => m.ReleaseDate);
+                    movies = movies.OrderBy(m => m.ReleaseDate).ThenBy(m => m.Title);
                     break;
                 case "Price":
-                    movies = movies.OrderBy(m => m.Price);
+                    movies = movies.OrderBy(m => m.Price).ThenBy(m => m.Title);
                     break;
                 case "Genre":
-                    movies = movies.OrderBy(m => m.Genre);
+                    movies = movies.OrderBy(m => m.Genre).ThenBy(m => m.Title);
                     break;
                 case "Rating":
-                    movies = movies.OrderBy(m => m.Rating);
+                    movies = movies.OrderBy(m => m.Rating).ThenBy(m => m.Title);
                     break;
                 default:
                     movies = movies.OrderBy(m => m.Title);
