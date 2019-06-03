@@ -95,7 +95,7 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ID,Title,ReleaseDate,Genre,Price, Rating")]Movie movie)
+        public IActionResult Create(Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +119,7 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public IActionResult Edit(int id, Movie movie)
         {
             if (ModelState.IsValid)
             {
