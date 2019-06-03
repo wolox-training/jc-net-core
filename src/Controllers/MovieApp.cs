@@ -32,7 +32,7 @@ namespace MovieApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public IActionResult Create(Movie movie)
         {
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
@@ -52,7 +52,7 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public IActionResult Edit(int id, Movie movie)
         {
             if (id != movie.Id)
             {
