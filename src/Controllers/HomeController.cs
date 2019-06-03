@@ -30,7 +30,14 @@ namespace MvcMovie.Controllers
         [Authorize]
         public IActionResult Privacy() => View();
 
+        [HttpGet]
         public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost,ActionName("Contact")]
+        public IActionResult ContactSend()
         {
             SmtpClient client = new SmtpClient("smtp.mailtrap.io");
             client.UseDefaultCredentials = false;
