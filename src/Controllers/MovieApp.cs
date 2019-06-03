@@ -29,7 +29,7 @@ namespace MovieApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(string movieGenre, string searchString, string sortOrder)
+        public IActionResult Index(string movieGenre, string searchString, string sortOrder, int? pageNumber)
         {
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Title" : "";
             ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
@@ -72,12 +72,13 @@ namespace MovieApp.Controllers
             }
 
             var genresquery = movies.Select(m => m.Genre).ToArray();
-            var movieGenreVM = new MovieGenreViewModel
-            {
-                Genres = new SelectList(genresquery.Distinct().ToList()),
-                Movies = movies.ToList()
-            };
+            int cont = movies.Count();
+            int  pageSize = 3;
 
+            var movieGenreVM = new PaginatedList<Movie>(movies.ToList(),cont,pageNumber ?? 1,pageSize);
+
+            movieGenreVM.Genres = new SelectList(genresquery.Distinct().ToList());
+ 
             return View(movieGenreVM);
         }
 
