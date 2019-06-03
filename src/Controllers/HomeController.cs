@@ -6,6 +6,7 @@ using MvcMovie.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
 using System.Net;
+using Mailer;
 
 namespace MvcMovie.Controllers
 {
@@ -25,28 +26,32 @@ namespace MvcMovie.Controllers
 
         private readonly IHtmlLocalizer<HomeController> _localizer;
 
-        public HomeController(IHtmlLocalizer<HomeController> localizer) => this._localizer = localizer;
+        public HomeController(IHtmlLocalizer<HomeController> localizer,IEmailService Mailer)
+        {
+            this._localizer = localizer;
+            _Mailer = Mailer;
+        } 
 
         [Authorize]
         public IActionResult Privacy() => View();
 
+        private readonly IEmailService _Mailer;
+
         public IActionResult Contact()
         {
-            /* MAIL GENÉRICO
-            SmtpClient client = new SmtpClient("smtp.gmail.com");
-            client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("pruebafalso4@gmail.com", "geougcahvdtcvwwu");
-            client.Port=587;
-            client.EnableSsl=true;
-            
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("pruebafalso4@gmail.com");
-            mailMessage.To.Add("jose.casanova@wolox.com.ar");
-            mailMessage.IsBodyHtml=true;
-            mailMessage.Body = "Don't Worry, be Happy";
-            mailMessage.Subject = "Mail Test";
-            client.Send(mailMessage);
-            */
+            EmailMessage mailMessage= new EmailMessage();
+            EmailAddress to = new EmailAddress();
+            to.Name = "Falso";
+            to.Address = "jose.casanova@wolox.com.ar";
+            mailMessage.ToAddresses.Add(to);
+            EmailAddress fromI = new EmailAddress();
+            fromI.Name = "YoFalso";
+            fromI.Address = "pruebafalso4@gmail.com";
+            mailMessage.FromAddresses.Add(fromI);
+            mailMessage.Subject="Mail Test";
+            mailMessage.Content="Don't Worry, be Happy";
+            _Mailer.Send(mailMessage);
+
             return View();
 
         }
