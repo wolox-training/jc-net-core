@@ -12,6 +12,7 @@ using System.Globalization;
 using MvcMovie.Models;
 using MvcMovie.Repositories.Interfaces;
 using System;
+using Mailer;
 
 namespace src
 {
@@ -83,6 +84,9 @@ namespace src
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<MvcMovieContext>();
+
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+	        services.AddTransient<IEmailService, EmailService>();
 
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

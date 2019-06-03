@@ -30,26 +30,25 @@ namespace MvcMovie.Controllers
         [Authorize]
         public IActionResult Privacy() => View();
 
-        [HttpGet]
         public IActionResult Contact()
         {
-            return View();
-        }
-
-        [HttpPost,ActionName("Contact")]
-        public IActionResult ContactSend()
-        {
-            SmtpClient client = new SmtpClient("smtp.mailtrap.io");
+            /* MAIL GENÉRICO
+            SmtpClient client = new SmtpClient("smtp.gmail.com");
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("6005220a480d62", "6531177fbc4017");
+            client.Credentials = new NetworkCredential("pruebafalso4@gmail.com", "geougcahvdtcvwwu");
+            client.Port=587;
+            client.EnableSsl=true;
             
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("559eeb2ac5-e0bff9@inbox.mailtrap.io");
-            mailMessage.To.Add("marcos.trucco@wolox.com.ar");
+            mailMessage.From = new MailAddress("pruebafalso4@gmail.com");
+            mailMessage.To.Add("jose.casanova@wolox.com.ar");
+            mailMessage.IsBodyHtml=true;
             mailMessage.Body = "Don't Worry, be Happy";
             mailMessage.Subject = "Mail Test";
             client.Send(mailMessage);
+            */
             return View();
+
         }
     }
 }
