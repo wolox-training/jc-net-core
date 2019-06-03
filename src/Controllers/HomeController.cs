@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
 using System.Net;
 using Mailer;
+using MvcMovie.Models;
 
 namespace MvcMovie.Controllers
 {
@@ -37,22 +38,30 @@ namespace MvcMovie.Controllers
 
         private readonly IEmailService _Mailer;
 
+
+        [HttpGet]
         public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(string Name, string Adress, string Subject, string Body)
         {
             EmailMessage mailMessage= new EmailMessage();
             EmailAddress to = new EmailAddress();
-            to.Name = "Falso";
-            to.Address = "jose.casanova@wolox.com.ar";
+            to.Name = Name;
+            to.Address = Adress;
             mailMessage.ToAddresses.Add(to);
             EmailAddress fromI = new EmailAddress();
             fromI.Name = "YoFalso";
             fromI.Address = "pruebafalso4@gmail.com";
             mailMessage.FromAddresses.Add(fromI);
-            mailMessage.Subject="Mail Test";
-            mailMessage.Content="Don't Worry, be Happy";
+            mailMessage.Subject= Subject;
+            mailMessage.Content= Body;
             _Mailer.Send(mailMessage);
 
-            return View();
+            return RedirectToAction("Index");
 
         }
     }
