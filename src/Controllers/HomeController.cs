@@ -35,7 +35,6 @@ namespace MvcMovie.Controllers
             SmtpClient client = new SmtpClient("smtp.mailtrap.io");
             client.UseDefaultCredentials = false;
             client.Credentials = new NetworkCredential("6005220a480d62", "6531177fbc4017");
-            client.Port=587;
             
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("559eeb2ac5-e0bff9@inbox.mailtrap.io");
