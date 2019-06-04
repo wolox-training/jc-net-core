@@ -38,6 +38,7 @@ namespace MvcMovie.Controllers
 
             ViewData["CurrentSort"] = sortOrder;
             ViewData["CurrentFilter"] = searchString;
+            ViewData["GenreFilter"] = movieGenre;
 
             switch (sortOrder)
             {

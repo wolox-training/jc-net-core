@@ -76,14 +76,16 @@
 <a asp-action="Index"
     asp-route-sortOrder="@ViewData["CurrentSort"]"
     asp-route-pageNumber="@(Model.PageIndex - 1)"
-    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+    asp-route-searchString="@ViewData["CurrentFilter"]"
+    asp-route-movieGenre="@ViewData["GenreFilter"]"
     class="btn btn-default @prevDisabled">
     Previous
 </a>
 <a asp-action="Index"
     asp-route-sortOrder="@ViewData["CurrentSort"]"
     asp-route-pageNumber="@(Model.PageIndex + 1)"
-    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+    asp-route-searchString="@ViewData["CurrentFilter"]"
+    asp-route-movieGenre="@ViewData["GenreFilter"]"
     class="btn btn-default @nextDisabled">
     Next
 </a>
