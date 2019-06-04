@@ -10,7 +10,7 @@ using System.Linq;
 using src.Models;
 using System.Diagnostics;
 
-namespace MovieApp.Controllers
+namespace MvcMovie.Controllers
 {
 
     [Authorize]
@@ -66,7 +66,7 @@ namespace MovieApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Movie movie)
+        public IActionResult Create([Bind("ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
