@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.Repositories.DataBase;
+using System.Globalization;
+using MvcMovie.Models;
+using MvcMovie.Repositories.Interfaces;
 
 namespace src
 {
@@ -27,13 +29,21 @@ namespace src
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            
             services.AddMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             
             services.AddDbContext<MvcMovieContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
             services.AddScoped<MvcMovieContext>();
+        
+
+            services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
+            services.AddMvc().AddViewLocalization();
+            var culture = new CultureInfo("fr-FR");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
