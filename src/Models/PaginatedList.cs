@@ -9,6 +9,7 @@ namespace MvcMovie.Models
 {
     public class PaginatedList<T> : List<T>
     {
+        public List<Movie> Movies { get; set; }
         public SelectList Genres { get; set; }
         public string MovieGenre { get; set; }
         public string SearchString { get; set; }
@@ -39,10 +40,10 @@ namespace MvcMovie.Models
             }
         }
 
-        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
+        public static PaginatedList<T> Create(List<T> source, int pageIndex, int pageSize)
         {
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var count = source.Count();
+            var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }

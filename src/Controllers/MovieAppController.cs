@@ -1,16 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
-using src.Models;
-using System.Diagnostics;
 
-namespace MovieApp.Controllers
+namespace MvcMovie.Controllers
 {
 
     [Authorize]
@@ -78,8 +75,9 @@ namespace MovieApp.Controllers
             var movieGenreVM = new PaginatedList<Movie>(movies.ToList(),cont,pageNumber ?? 1,pageSize);
 
             movieGenreVM.Genres = new SelectList(genresquery.Distinct().ToList());
+            movieGenreVM.Movies = movies.ToList();
  
-            return View(movieGenreVM);
+            return View(PaginatedList<Movie>.Create(movieGenreVM.Movies, pageNumber ?? 1, pageSize));
         }
 
         [HttpPost]
@@ -96,7 +94,7 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Movie movie)
+        public IActionResult Create([Bind("ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {

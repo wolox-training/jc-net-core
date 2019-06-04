@@ -22,13 +22,13 @@
         <thead>
             <tr>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder=@ViewData["TitleSortParm"]>Title</a>
+                    <a asp-action="Index" asp-route-sortOrder=@ViewData["TitleSortParm"]>@Html.DisplayNameFor(model => model.Movies[0].Title)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder=@ViewData["DateSortParm"]>ReleaseDate</a>
+                    <a asp-action="Index" asp-route-sortOrder=@ViewData["DateSortParm"]>@Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder=@ViewData["GenreSortParm"]>Genre</a>
+                    <a asp-action="Index" asp-route-sortOrder=@ViewData["GenreSortParm"]>@Html.DisplayNameFor(model => model.Movies[0].Genre)</a>
                 </th>
                 <th>
                     <a asp-action="Index" asp-route-sortOrder=@ViewData["PriceSortParm"]>@Html.DisplayNameFor(model => model.Movies[0].Price)</a>
