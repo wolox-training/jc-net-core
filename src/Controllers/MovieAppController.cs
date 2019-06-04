@@ -3,7 +3,7 @@ using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MovieApp.Controllers
+namespace MvcMovie.Controllers
 {
     public class MovieAppController : Controller
     {
@@ -32,7 +32,7 @@ namespace MovieApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Movie movie)
+        public IActionResult Create([Bind("ID,Title,ReleaseDate,Genre,Price")] Movie movie)
         {
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
