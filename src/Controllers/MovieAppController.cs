@@ -165,5 +165,36 @@ namespace MvcMovie.Controllers
         {
             return View(UnitOfWork.Movies.Get(id));
         }
+
+        [HttpGet]
+		public IActionResult Comment(int id)
+		{
+		    var movie = UnitOfWork.Movies.Get(id);
+		    if (movie == null)
+		    {
+		        return NotFound();
+		    }
+            var comment = UnitOfWork.Comments.GetAll();
+            CommentViewModel commentVM = new CommentViewModel();
+            commentVM.movie=movie;
+            commentVM.Comments = comment.Where(c => c.MovieID == id).ToList();
+
+		    return View(commentVM);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Comment(int id, Comment comment)
+		{
+		    if (ModelState.IsValid)
+		    {
+		        comment.ReleaseDate = DateTime.Now;
+                comment.MovieID = id;
+		        UnitOfWork.Comments.Update(comment);
+		        UnitOfWork.Complete();
+		        return RedirectToAction("Index");
+		    }
+		    return View(comment);
+		}
     }
 }
