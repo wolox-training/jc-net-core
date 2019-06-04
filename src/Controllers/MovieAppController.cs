@@ -36,6 +36,9 @@ namespace MvcMovie.Controllers
 
             var movies = UnitOfWork.Movies.GetAll();
 
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["CurrentFilter"] = searchString;
+
             switch (sortOrder)
             {
                 case "Title":
@@ -71,13 +74,13 @@ namespace MvcMovie.Controllers
             var genresquery = movies.Select(m => m.Genre).ToArray();
             int cont = movies.Count();
             int  pageSize = 3;
+            var Genres = new SelectList(genresquery.Distinct().ToList());
 
-            var movieGenreVM = new PaginatedList<Movie>(movies.ToList(),cont,pageNumber ?? 1,pageSize);
+            var moviePage = new PaginatedList<Movie>(movies.ToList(),cont,pageNumber ?? 1,pageSize,Genres);
 
-            movieGenreVM.Genres = new SelectList(genresquery.Distinct().ToList());
-            movieGenreVM.Movies = movies.ToList();
+            moviePage.Movies = movies.ToList();
  
-            return View(PaginatedList<Movie>.Create(movieGenreVM.Movies, pageNumber ?? 1, pageSize));
+            return View(PaginatedList<Movie>.Create(moviePage.Movies, pageNumber ?? 1, pageSize,Genres));
         }
 
         [HttpPost]

@@ -16,10 +16,11 @@ namespace MvcMovie.Models
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
 
-        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize,SelectList genres)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            Genres = genres;
 
             this.AddRange(items);
         }
@@ -40,11 +41,12 @@ namespace MvcMovie.Models
             }
         }
 
-        public static PaginatedList<T> Create(List<T> source, int pageIndex, int pageSize)
+        public static PaginatedList<T> Create(List<T> source, int pageIndex, int pageSize, SelectList genres)
         {
             var count = source.Count();
             var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
-            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+            return new PaginatedList<T>(items, count, pageIndex, pageSize,genres);
         }
     }
 }
+
