@@ -10,7 +10,7 @@ using System.Linq;
 using src.Models;
 using System.Diagnostics;
 
-namespace MovieApp.Controllers
+namespace MvcMovie.Controllers
 {
 
     [Authorize]
