@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
 
-namespace MovieApp.Controllers
+namespace MvcMovie.Controllers
 {
     public class MovieAppController : Controller
     {
