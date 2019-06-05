@@ -104,7 +104,7 @@ namespace MvcMovie.Controllers
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.Movies.Update(movie);
+                UnitOfWork.Movies.Add(movie);
                 UnitOfWork.Complete();
                 return RedirectToAction("Index");
             }
