@@ -27,15 +27,23 @@ namespace MvcMovie.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Movie movie = new Movie();
+            MovieViewModel movieVM = new MovieViewModel(movie);
+            return View(movieVM);
         }
 
         [HttpPost]
-        public IActionResult Create([Bind("ID,Title,ReleaseDate,Genre,Price")] Movie movie)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Movie movie)
         {
-            UnitOfWork.Movies.Add(movie);
-            UnitOfWork.Complete();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                UnitOfWork.Movies.Add(movie);
+                UnitOfWork.Complete();
+                return RedirectToAction("Index");
+            }
+            MovieViewModel movieVM = new MovieViewModel(movie);
+            return View(movieVM);
         }
     }
 }
