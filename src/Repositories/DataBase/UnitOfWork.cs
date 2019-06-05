@@ -16,7 +16,6 @@ namespace MvcMovie.Models
 
         public IMovieRepository Movies { get; private set; }
 
-
         public int Complete()
         {
             return _context.SaveChanges();
