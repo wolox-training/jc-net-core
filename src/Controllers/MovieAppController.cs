@@ -31,10 +31,13 @@ namespace MvcMovie.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([Bind("ID,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public IActionResult Create(Movie movie)
         {
-            UnitOfWork.Movies.Add(movie);
-            UnitOfWork.Complete();
+            if (ModelState.IsValid){
+                UnitOfWork.Movies.Add(movie);
+                UnitOfWork.Complete();
+                return RedirectToAction("Index");
+            }
             return View();
         }
     }
