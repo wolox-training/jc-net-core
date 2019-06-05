@@ -62,31 +62,36 @@ namespace MvcMovie.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Movie movie = new Movie();
+            MovieViewModel movieVM = new MovieViewModel(movie);
+            return View(movieVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public IActionResult Create(Movie movie)
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.Movies.Update(movie);
+                UnitOfWork.Movies.Add(movie);
                 UnitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            return View(movie);
+            MovieViewModel movieVM = new MovieViewModel(movie);
+            return View(movieVM);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
             var movie = UnitOfWork.Movies.Get(id);
+            MovieViewModel mvm = new MovieViewModel(movie);
+
             if (movie == null)
             {
                 return NotFound();
             }
-            return View(movie);
+            return View(mvm);
         }
 
         [HttpPost]
