@@ -4,7 +4,7 @@ using MvcMovie.Models;
 using src.Models;
 using System.Diagnostics;
 
-namespace MovieApp.Controllers
+namespace MvcMovie.Controllers
 {
     public class MovieAppController : Controller
     {
