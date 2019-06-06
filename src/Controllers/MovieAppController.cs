@@ -21,7 +21,7 @@ namespace MvcMovie.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(UnitOfWork.Movies.GetAll());
         }
 
         [HttpGet]

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
+using MvcMovie.Repositories.Interfaces;
 
 namespace MvcMovie.Controllers
 {
