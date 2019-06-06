@@ -4,10 +4,25 @@
 @{
     ViewData["Title"] =  "Home Page";
 }
-@if (Model !=null)
-{
+
+<script>
+  var tableBody = $('#ListComments tbody');
+  var url = '@Url.Action("buttonComment", "MovieApp/Comment")'; // adjust to suit
+  $('#buttonComment').click(function() {
+    $.get('url, function(response) {
+        tableBody.append(response);
+    });
+    }
+  });
+</script>
+
+
+<form asp-action="Comment">
+
+    @if (Model !=null)
+    {
     <h1>List of Comments</h1>
-    <table class="table">
+    <table class="table" id="ListComments">
         <thead>
             <tr>
                 <th>
@@ -38,14 +53,13 @@
                 }
         </tbody>
     </table>
-}
+    }
 
-<form asp-action="Comment">
     <h1>Comments</h1>
     <p>Talk about the movie</p>
     <div class="form-group">
         <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
+        <input asp-for="Title" class="form-control"/>
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -54,6 +68,6 @@
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="Send" class="btn btn-primary" />
+        <input type="submit" value="Send" class="btn btn-primary" id="buttonComment" />
     </div>
 </form>
