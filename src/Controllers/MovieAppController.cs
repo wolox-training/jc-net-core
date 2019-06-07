@@ -186,26 +186,5 @@ namespace MvcMovie.Controllers
 
 		    return View(commentVM);
 		}
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public IActionResult Comment(int id, Comment comment)
-		{
-		    if (ModelState.IsValid)
-		    {
-		        comment.ReleaseDate = DateTime.Now;
-                comment.MovieID = id;
-		        UnitOfWork.Comments.Update(comment);
-		        UnitOfWork.Complete();
-		        //return RedirectToAction("Index");
-                var movie = UnitOfWork.Movies.Get(id);
-                var c = UnitOfWork.Comments.GetAll();
-                CommentViewModel commentVM = new CommentViewModel();
-                commentVM.movie=movie;
-                commentVM.Comments = c.Where(co => co.MovieID == id).ToList();
-                return View(commentVM);
-		    }
-		    return View(comment);
-		}
     }
 }
