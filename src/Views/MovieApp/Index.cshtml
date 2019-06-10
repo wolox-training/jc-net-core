@@ -16,7 +16,7 @@
         <input type="submit" value="Filter" />
     </p>
 </form>
-@if (Model !=null)
+@if (Model !=null && Model.Movies.Any())
 {
     <table class="table">
         <thead>
