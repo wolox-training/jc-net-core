@@ -5,6 +5,11 @@
     ViewData["Title"] =  "Home Page";
 }
 
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
+}
+
     @if (Model !=null)
     {
     <h1>List of Comments</h1>
@@ -43,15 +48,17 @@
 
     <h1>Comments</h1>
     <p>Talk about the movie</p>
+    <label class="control-label" id="valiToken" type="hidden">@Html.AntiForgeryToken()</label>
+    <input type="hidden" name="comMovieId" value="@Html.DisplayFor(modelItem => modelItem.movie.Id)">
     <div class="form-group">
         <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control"/>
-        <span asp-validation-for="Title" class="text-danger" id="comTitle"></span>
+        <input asp-for="Title" class="form-control" id="comTitle"/>
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Content" class="control-label"></label>
-        <input asp-for="Content" class="form-control" />
-        <span asp-validation-for="Content" class="text-danger" id="comContent"></span>
+        <input asp-for="Content" class="form-control" id="comContent"/>
+        <span asp-validation-for="Content" class="text-danger"></span>
     </div>
     <div class="form-group">
         <input type="button" value="Send" class="btn btn-primary" id="buttonComment"/>
