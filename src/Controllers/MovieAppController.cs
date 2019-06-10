@@ -36,9 +36,8 @@ namespace MvcMovie.Controllers
             ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Price" : "";
             ViewData["GenreSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Genre" : "";
             ViewData["RatingSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Rating" : "";
-
             var movies = UnitOfWork.Movies.GetAll();
-
+            var genresquery = movies.Select(m => m.Genre).ToArray();
             switch (sortOrder)
             {
                 case "Title":
@@ -60,31 +59,16 @@ namespace MvcMovie.Controllers
                     movies = movies.OrderBy(m => m.Title);
                     break;
             }
-
             if (!string.IsNullOrEmpty(searchString))
-            {
                 movies = movies.Where(s => s.Title.Contains(searchString));
-            }
-
             if (!string.IsNullOrEmpty(movieGenre))
-            {
                 movies = movies.Where(x => x.Genre == movieGenre);
-            }
-
-            var genresquery = movies.Select(m => m.Genre).ToArray();
             var movieGenreVM = new MovieGenreViewModel
             {
                 Genres = new SelectList(genresquery.Distinct().ToList()),
                 Movies = movies.ToList()
             };
-
             return View(movieGenreVM);
-        }
-
-        [HttpPost]
-        public string Index(string searchString, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         [HttpGet]
