@@ -17,5 +17,6 @@ namespace MvcMovie.Repositories.Interfaces
         
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
+        void Update(TEntity entity);
     }
 }

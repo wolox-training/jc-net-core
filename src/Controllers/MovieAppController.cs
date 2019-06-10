@@ -45,5 +45,31 @@ namespace MvcMovie.Controllers
             MovieViewModel movieVM = new MovieViewModel(movie);
             return View(movieVM);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var movie = UnitOfWork.Movies.Get(id);
+            MovieViewModel mvm = new MovieViewModel(movie);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(mvm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                UnitOfWork.Movies.Update(movie);
+                UnitOfWork.Complete();
+                return RedirectToAction("Index");
+            }
+            return View(movie);
+        }
     }
 }
