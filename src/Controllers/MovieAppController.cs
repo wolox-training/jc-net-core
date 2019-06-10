@@ -32,18 +32,11 @@ namespace MvcMovie.Controllers
         public IActionResult Index(string movieGenre, string searchString)
         {
             var movies = UnitOfWork.Movies.GetAll();
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                movies = movies.Where(s => s.Title.Contains(searchString));
-            }
-
-            if (!string.IsNullOrEmpty(movieGenre))
-            {
-                movies = movies.Where(x => x.Genre == movieGenre);
-            }
-
             var genresquery = movies.Select(m => m.Genre).ToArray();
+            if (!string.IsNullOrEmpty(searchString))
+                movies = movies.Where(s => s.Title.Contains(searchString));
+            if (!string.IsNullOrEmpty(movieGenre))
+                movies = movies.Where(x => x.Genre == movieGenre);
             var movieGenreVM = new MovieGenreViewModel
             {
                 Genres = new SelectList(genresquery.Distinct().ToList()),
@@ -51,12 +44,6 @@ namespace MvcMovie.Controllers
             };
 
             return View(movieGenreVM);
-        }
-
-        [HttpPost]
-        public string Index(string searchString, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         [HttpGet]
