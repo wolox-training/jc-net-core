@@ -12,19 +12,9 @@ namespace MvcMovie.Repositories
         {
         }
 
-        public IEnumerable<Movie> GetMovieWithGenre(string genre)
-        {
-            return MvcMovieContext.Movies.Where(g => g.Genre == genre);
-        }
-
         public MvcMovieContext MvcMovieContext
         {
             get { return Context as MvcMovieContext; }
-        }
-
-        public IEnumerable<Movie> GetMovieWithPartTitle(string searchString)
-        {
-            return MvcMovieContext.Movies.Where(m => m.Title.Contains(searchString));
         }
     }
 }
