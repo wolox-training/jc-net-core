@@ -33,13 +33,11 @@ namespace MvcMovie.Controllers
             ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Price" : "";
             ViewData["GenreSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Genre" : "";
             ViewData["RatingSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Rating" : "";
-
             var movies = UnitOfWork.Movies.GetAll();
-
+            var genresquery = movies.Select(m => m.Genre).ToArray();
             ViewData["CurrentSort"] = sortOrder;
             ViewData["CurrentFilter"] = searchString;
             ViewData["GenreFilter"] = movieGenre;
-
             switch (sortOrder)
             {
                 case "Title":
@@ -61,33 +59,16 @@ namespace MvcMovie.Controllers
                     movies = movies.OrderBy(m => m.Title);
                     break;
             }
-
             if (!string.IsNullOrEmpty(searchString))
-            {
                 movies = movies.Where(s => s.Title.Contains(searchString));
-            }
-
             if (!string.IsNullOrEmpty(movieGenre))
-            {
                 movies = movies.Where(x => x.Genre == movieGenre);
-            }
-
-            var genresquery = movies.Select(m => m.Genre).ToArray();
             int cont = movies.Count();
             int  pageSize = 3;
             var Genres = new SelectList(genresquery.Distinct().ToList());
-
-            var moviePage = new PaginatedList<Movie>(movies.ToList(),cont,pageNumber ?? 1,pageSize,Genres);
-
+            var moviePage = PaginatedList<Movie>.Create(movies.ToList(),pageNumber ?? 1,pageSize,Genres);
             moviePage.Movies = movies.ToList();
- 
-            return View(PaginatedList<Movie>.Create(moviePage.Movies, pageNumber ?? 1, pageSize,Genres));
-        }
-
-        [HttpPost]
-        public string Index(string searchString, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
+            return View(moviePage);
         }
 
         [HttpGet]
