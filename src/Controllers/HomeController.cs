@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
 using MvcMovie.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMovie.Controllers
 {
@@ -24,6 +25,7 @@ namespace MvcMovie.Controllers
 
         public HomeController(IHtmlLocalizer<HomeController> localizer) => this._localizer = localizer;
 
+        [Authorize]
         public IActionResult Privacy() => View();
     }
 }

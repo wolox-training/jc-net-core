@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using src.Models;
 using System.Diagnostics;
 
 namespace MvcMovie.Controllers
 {
+
+    [Authorize]
     public class MovieAppController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
