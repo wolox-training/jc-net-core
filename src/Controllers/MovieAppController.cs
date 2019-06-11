@@ -107,7 +107,7 @@ namespace MvcMovie.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id, bool notUsed)
+        public IActionResult DeleteConfirmed(int id)
         {
             var movie = UnitOfWork.Movies.Get(id);
             if (movie == null)
