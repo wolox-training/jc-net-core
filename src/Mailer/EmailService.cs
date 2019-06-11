@@ -21,11 +21,8 @@ namespace Mailer
         {
             using (var emailClient = new Pop3Client())
             {
-                emailClient.Connect(_emailConfiguration.PopServer, _emailConfiguration.PopPort, true);
         
                 emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
-        
-                emailClient.Authenticate(_emailConfiguration.PopUsername, _emailConfiguration.PopPassword);
         
                 List<EmailMessage> emails = new List<EmailMessage>();
                 for(int i=0; i < emailClient.Count && i < maxCount; i++)
@@ -46,6 +43,10 @@ namespace Mailer
     
         public void Send(EmailMessage emailMessage)
         {
+            EmailAddress fromI = new EmailAddress();
+            fromI.Name = "Falso";
+            fromI.Address = _emailConfiguration.SmtpUsername;
+            emailMessage.FromAddresses.Add(fromI);
             var message = new MimeMessage();
             message.To.AddRange(emailMessage.ToAddresses.Select(x => new MailboxAddress(x.Name, x.Address)));
             message.From.AddRange(emailMessage.FromAddresses.Select(x => new MailboxAddress(x.Name, x.Address)));
