@@ -7,11 +7,12 @@
         comment.Title=$('#comTitle').val();
         comment.Content=$('#comContent').val();
         comment.ReleaseDate = new Date();
+        var dataC = (comment.ReleaseDate.getMonth() + 1) + '/' + comment.ReleaseDate.getDate() + '/' +  comment.ReleaseDate.getFullYear();
         comment.MovieId =$('[name=comMovieId]').val();
         var tokenVal = $('[name=__RequestVerificationToken]').val();
 
         if (comment.Title != '' && comment.Content !='')
-            tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + comment.ReleaseDate + '</td> <tr>');
+            tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');
 
         $.ajax({  
             type: "POST",  
