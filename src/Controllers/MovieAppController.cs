@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
+using src.Models;
+using System.Diagnostics;
 
 namespace MvcMovie.Controllers
 {
@@ -70,6 +72,39 @@ namespace MvcMovie.Controllers
                 return RedirectToAction("Index");
             }
             return View(movie);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var movie = UnitOfWork.Movies.Get(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var movie = UnitOfWork.Movies.Get(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                UnitOfWork.Movies.Remove(movie);
+                UnitOfWork.Complete();
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        public IActionResult Details(int id)
+        {
+            return View(UnitOfWork.Movies.Get(id));
         }
     }
 }
