@@ -6,7 +6,7 @@
 
 <h2>Movie App</h2>
 <a asp-action="Create">Create New</a>
-<form asp-controller="Movies" asp-action="Index" method="get">
+<form asp-controller=" asp-action="Index" method="get">
     <p>
         <select asp-for="MovieGenre" asp-items="Model.Genres">
             <option value="">All</option>
@@ -16,25 +16,25 @@
         <input type="submit" value="Filter" />
     </p>
 </form>
-@if (Model !=null)
+@if (Model !=null && Model.Any())
 {
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]"  asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.Movies[0].Title)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]"  asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model[0].Title)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model[0].ReleaseDate)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.Movies[0].Genre)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model[0].Genre)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.Movies[0].Price)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model[0].Price)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["RatingSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.Movies[0].Rating)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["RatingSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model[0].Rating)</a>
                 </th>
                 <th></th>
             </tr>
