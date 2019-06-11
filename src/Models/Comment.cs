@@ -23,5 +23,13 @@ namespace MvcMovie.Models
         public int MovieID { get; set; }
         public Movie Movie { get; set; }
 
+        public Comment(CommentViewModel commentVM)
+        {
+			this.Title = commentVM.Title;
+			this.Content = commentVM.Content;
+			this.ReleaseDate = DateTime.Now;
+			this.MovieID = commentVM.MovieId;
+        }
+
     }
 }

@@ -30,13 +30,13 @@ namespace MvcMovie.Controllers
         public HomeController(IHtmlLocalizer<HomeController> localizer,IEmailService Mailer)
         {
             this._localizer = localizer;
-            _Mailer = Mailer;
+            _mailer = Mailer;
         } 
 
         [Authorize]
         public IActionResult Privacy() => View();
 
-        private readonly IEmailService _Mailer;
+        private readonly IEmailService _mailer;
 
 
         [HttpGet]
@@ -46,21 +46,16 @@ namespace MvcMovie.Controllers
         }
 
         [HttpPost]
-        public IActionResult Contact(string Name, string Adress, string Subject, string Body)
+        public IActionResult Contact(string name, string adress, string subject, string body)
         {
             EmailMessage mailMessage= new EmailMessage();
             EmailAddress to = new EmailAddress();
-            to.Name = Name;
-            to.Address = Adress;
+            to.Name = name;
+            to.Address = adress;
             mailMessage.ToAddresses.Add(to);
-            EmailAddress fromI = new EmailAddress();
-            fromI.Name = "YoFalso";
-            fromI.Address = "pruebafalso4@gmail.com";
-            mailMessage.FromAddresses.Add(fromI);
-            mailMessage.Subject= Subject;
-            mailMessage.Content= Body;
-            _Mailer.Send(mailMessage);
-
+            mailMessage.Subject= subject;
+            mailMessage.Content= body;
+            _mailer.Send(mailMessage);
             return RedirectToAction("Index");
 
         }

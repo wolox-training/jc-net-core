@@ -29,15 +29,19 @@ namespace MvcMovie.Controllers
         public IActionResult Index(string movieGenre, string searchString, string sortOrder, int? pageNumber)
         {
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Title" : "";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
-            ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Price" : "";
-            ViewData["GenreSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Genre" : "";
-            ViewData["RatingSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Rating" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewData["GenreSortParm"] = sortOrder == "Genre" ? "genre_desc" : "Genre";
+            ViewData["RatingSortParm"] = sortOrder == "Rating" ? "rating_desc" : "Rating";
             var movies = UnitOfWork.Movies.GetAll();
+            var genresquery = movies.Select(m => m.Genre).ToArray();
             ViewData["CurrentSort"] = sortOrder;
             ViewData["CurrentFilter"] = searchString;
             ViewData["GenreFilter"] = movieGenre;
-            var genresquery = movies.Select(m => m.Genre).ToArray();
+            if (!string.IsNullOrEmpty(searchString))
+                movies = movies.Where(s => s.Title.Contains(searchString));
+            if (!string.IsNullOrEmpty(movieGenre))
+                movies = movies.Where(x => x.Genre == movieGenre);
             switch (sortOrder)
             {
                 case "Title":
@@ -46,24 +50,31 @@ namespace MvcMovie.Controllers
                 case "Date":
                     movies = movies.OrderBy(m => m.ReleaseDate).ThenBy(m => m.Title);
                     break;
+                case "date_desc":
+                    movies = movies.OrderByDescending(m => m.ReleaseDate).ThenBy(m => m.Title);
+                    break;
                 case "Price":
                     movies = movies.OrderBy(m => m.Price).ThenBy(m => m.Title);
+                    break;
+                case "price_desc":
+                    movies = movies.OrderByDescending(m => m.Price).ThenBy(m => m.Title);
                     break;
                 case "Genre":
                     movies = movies.OrderBy(m => m.Genre).ThenBy(m => m.Title);
                     break;
+                case "genre_desc":
+                    movies = movies.OrderByDescending(m => m.Genre).ThenBy(m => m.Title);
+                    break;
                 case "Rating":
                     movies = movies.OrderBy(m => m.Rating).ThenBy(m => m.Title);
+                    break;
+                case "rating_desc":
+                    movies = movies.OrderByDescending(m => m.Rating).ThenBy(m => m.Title);
                     break;
                 default:
                     movies = movies.OrderBy(m => m.Title);
                     break;
             }
-            if (!string.IsNullOrEmpty(searchString))
-                movies = movies.Where(s => s.Title.Contains(searchString));
-            if (!string.IsNullOrEmpty(movieGenre))
-                movies = movies.Where(x => x.Genre == movieGenre);
-            int cont = movies.Count();
             int  pageSize = 3;
             var Genres = new SelectList(genresquery.Distinct().ToList());
             var moviePage = PaginatedList<Movie>.Create(movies.ToList(),pageNumber ?? 1,pageSize,Genres);

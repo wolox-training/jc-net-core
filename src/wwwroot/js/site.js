@@ -2,7 +2,6 @@
     var tableBody = $('#ListComments tbody');
     var urlC = '/api/v1/MovieApiController/Comment';
     $('#buttonComment').click(function() {
-
         var comment = new Object();
         comment.Title=$('#comTitle').val();
         comment.Content=$('#comContent').val();
@@ -10,10 +9,6 @@
         var dataC = (comment.ReleaseDate.getMonth() + 1) + '/' + comment.ReleaseDate.getDate() + '/' +  comment.ReleaseDate.getFullYear();
         comment.MovieId =$('[name=comMovieId]').val();
         var tokenVal = $('[name=__RequestVerificationToken]').val();
-
-        if (comment.Title != '' && comment.Content !='')
-            tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');
-
         $.ajax({  
             type: "POST",  
             url: urlC,  
@@ -22,7 +17,8 @@
                 commentVM: comment
             },      
             success: function(response) {  
-                if (response != null) {  
+                if (response != null) {
+                    tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');  
                     alert("Success");  
                 } else {  
                     alert("Something went wrong");  
