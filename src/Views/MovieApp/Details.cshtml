@@ -7,6 +7,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
@@ -18,27 +21,33 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Genre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => modelItem.Price)
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Rating)
+            </td>
+        </tr>
     </tbody>
 </table>
 @Html.ActionLink("Back to List", "Index")

@@ -17,5 +17,6 @@ namespace MvcMovie.Models
 
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+        public string Rating { get; set; }
     }
 }
