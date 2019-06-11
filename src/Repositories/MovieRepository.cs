@@ -2,6 +2,7 @@ using MvcMovie.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace MvcMovie.Repositories
 {
@@ -9,11 +10,6 @@ namespace MvcMovie.Repositories
     {
         public MovieRepository(MvcMovieContext context) : base(context)
         {
-        }
-
-        public Movie GetMovieWithGenre(string genre)
-        {
-            return MvcMovieContext.Movies.Include(g => g.Genre).SingleOrDefault(g => g.Genre == genre);
         }
 
         public MvcMovieContext MvcMovieContext

@@ -3,6 +3,10 @@ using MvcMovie.Repositories.Interfaces;
 using MvcMovie.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
 using src.Models;
 using System.Diagnostics;
 
@@ -25,9 +29,21 @@ namespace MvcMovie.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string movieGenre, string searchString)
         {
-            return View(UnitOfWork.Movies.GetAll());
+            var movies = UnitOfWork.Movies.GetAll();
+            var genresquery = movies.Select(m => m.Genre).ToArray();
+            if (!string.IsNullOrEmpty(searchString))
+                movies = movies.Where(s => s.Title.Contains(searchString));
+            if (!string.IsNullOrEmpty(movieGenre))
+                movies = movies.Where(x => x.Genre == movieGenre);
+            var movieGenreVM = new MovieGenreViewModel
+            {
+                Genres = new SelectList(genresquery.Distinct().ToList()),
+                Movies = movies.ToList()
+            };
+
+            return View(movieGenreVM);
         }
 
         [HttpGet]

@@ -1,4 +1,3 @@
-using MvcMovie.Repositories.Interfaces;
 using System;
 
 namespace MvcMovie.Repositories.Interfaces
