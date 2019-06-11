@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MvcMovie.Models
 {
-    public class MovieViewModel
-    {
+	public class MovieViewModel
+	{
         public MovieViewModel(Movie m)
         {
             Id = m.Id;
@@ -40,5 +40,5 @@ namespace MvcMovie.Models
         [StringLength(5)]
         [Required]
         public string Rating { get; set; }
-    }
+	}
 }

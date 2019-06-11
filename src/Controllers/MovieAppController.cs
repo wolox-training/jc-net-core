@@ -29,10 +29,36 @@ namespace MvcMovie.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(string movieGenre, string searchString)
+        public IActionResult Index(string movieGenre, string searchString, string sortOrder)
         {
+            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Title" : "";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewData["PriceSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Price" : "";
+            ViewData["GenreSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Genre" : "";
+            ViewData["RatingSortParm"] = String.IsNullOrEmpty(sortOrder) ? "Rating" : "";
             var movies = UnitOfWork.Movies.GetAll();
             var genresquery = movies.Select(m => m.Genre).ToArray();
+            switch (sortOrder)
+            {
+                case "Title":
+                    movies = movies.OrderByDescending(m => m.Title);
+                    break;
+                case "Date":
+                    movies = movies.OrderBy(m => m.ReleaseDate).ThenBy(m => m.Title);
+                    break;
+                case "Price":
+                    movies = movies.OrderBy(m => m.Price).ThenBy(m => m.Title);
+                    break;
+                case "Genre":
+                    movies = movies.OrderBy(m => m.Genre).ThenBy(m => m.Title);
+                    break;
+                case "Rating":
+                    movies = movies.OrderBy(m => m.Rating).ThenBy(m => m.Title);
+                    break;
+                default:
+                    movies = movies.OrderBy(m => m.Title);
+                    break;
+            }
             if (!string.IsNullOrEmpty(searchString))
                 movies = movies.Where(s => s.Title.Contains(searchString));
             if (!string.IsNullOrEmpty(movieGenre))
@@ -42,7 +68,6 @@ namespace MvcMovie.Controllers
                 Genres = new SelectList(genresquery.Distinct().ToList()),
                 Movies = movies.ToList()
             };
-
             return View(movieGenreVM);
         }
 
