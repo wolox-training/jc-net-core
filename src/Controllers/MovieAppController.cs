@@ -63,7 +63,6 @@ namespace MvcMovie.Controllers
                 movies = movies.Where(s => s.Title.Contains(searchString));
             if (!string.IsNullOrEmpty(movieGenre))
                 movies = movies.Where(x => x.Genre == movieGenre);
-            int cont = movies.Count();
             int  pageSize = 3;
             var Genres = new SelectList(genresquery.Distinct().ToList());
             var moviePage = PaginatedList<Movie>.Create(movies.ToList(),pageNumber ?? 1,pageSize,Genres);
