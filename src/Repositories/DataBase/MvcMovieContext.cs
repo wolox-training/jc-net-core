@@ -15,6 +15,6 @@ namespace MvcMovie.Models
 
         public DbSet<Movie> Movies { get; set; }
 
-        public DbSet<Comment> Comment { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

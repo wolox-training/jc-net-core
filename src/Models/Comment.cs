@@ -21,7 +21,7 @@ namespace MvcMovie.Models
         public DateTime ReleaseDate { get; set; }
 
         public int MovieID { get; set; }
-        public Movie Movie { get; set; }
+        public virtual Movie Movie { get; set; }
 
         public Comment(){ }
 
