@@ -11,41 +11,18 @@ namespace Mailer
     public class EmailService : IEmailService
     {
         private readonly IEmailConfiguration _emailConfiguration;
+        public IEmailConfiguration EmailConfiguration => this._emailConfiguration;
     
         public EmailService(IEmailConfiguration emailConfiguration)
         {
             _emailConfiguration = emailConfiguration;
         }
     
-        public List<EmailMessage> ReceiveEmail(int maxCount = 10)
-        {
-            using (var emailClient = new Pop3Client())
-            {
-        
-                emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
-        
-                List<EmailMessage> emails = new List<EmailMessage>();
-                for(int i=0; i < emailClient.Count && i < maxCount; i++)
-                {
-                    var message = emailClient.GetMessage(i);
-                    var emailMessage = new EmailMessage
-                    {
-                        Content = !string.IsNullOrEmpty(message.HtmlBody) ? message.HtmlBody : message.TextBody,
-                        Subject = message.Subject
-                    };
-                    emailMessage.ToAddresses.AddRange(message.To.Select(x => (MailboxAddress)x).Select(x => new EmailAddress { Address = x.Address, Name = x.Name }));
-                    emailMessage.FromAddresses.AddRange(message.From.Select(x => (MailboxAddress)x).Select(x => new EmailAddress { Address = x.Address, Name = x.Name }));
-                }
-        
-                return emails;
-            }
-        }
-    
         public void Send(EmailMessage emailMessage)
         {
             EmailAddress fromI = new EmailAddress();
             fromI.Name = "Falso";
-            fromI.Address = _emailConfiguration.SmtpUsername;
+            fromI.Address = EmailConfiguration.SmtpUsername;
             emailMessage.FromAddresses.Add(fromI);
             var message = new MimeMessage();
             message.To.AddRange(emailMessage.ToAddresses.Select(x => new MailboxAddress(x.Name, x.Address)));
@@ -62,12 +39,12 @@ namespace Mailer
             using (var emailClient = new SmtpClient())
             {
                 //The last parameter here is to use SSL (Which you should!)
-                emailClient.Connect(_emailConfiguration.SmtpServer, _emailConfiguration.SmtpPort, true);
+                emailClient.Connect(EmailConfiguration.SmtpServer, EmailConfiguration.SmtpPort, true);
         
                 //Remove any OAuth functionality as we won't be using it. 
                 emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
         
-                emailClient.Authenticate(_emailConfiguration.SmtpUsername, _emailConfiguration.SmtpPassword);
+                emailClient.Authenticate(EmailConfiguration.SmtpUsername, EmailConfiguration.SmtpPassword);
         
                 emailClient.Send(message);
         

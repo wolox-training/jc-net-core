@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Net;
 using Mailer;
 using MvcMovie.Models;
+using System;
 
 namespace MvcMovie.Controllers
 {
@@ -26,38 +27,23 @@ namespace MvcMovie.Controllers
         }
 
         private readonly IHtmlLocalizer<HomeController> _localizer;
+        private readonly IEmailService _mailer;
+        public IHtmlLocalizer<HomeController> Localizer => this._localizer;
+        public IEmailService Mailer => this._mailer;
 
-        public HomeController(IHtmlLocalizer<HomeController> localizer,IEmailService Mailer)
+        public HomeController(IHtmlLocalizer<HomeController> localizer,IEmailService mailer)
         {
             this._localizer = localizer;
-            _mailer = Mailer;
+            _mailer = mailer;
         } 
 
         [Authorize]
         public IActionResult Privacy() => View();
 
-        private readonly IEmailService _mailer;
-
-
         [HttpGet]
         public IActionResult Contact()
         {
             return View();
-        }
-
-        [HttpPost]
-        public IActionResult Contact(string name, string adress, string subject, string body)
-        {
-            EmailMessage mailMessage= new EmailMessage();
-            EmailAddress to = new EmailAddress();
-            to.Name = name;
-            to.Address = adress;
-            mailMessage.ToAddresses.Add(to);
-            mailMessage.Subject= subject;
-            mailMessage.Content= body;
-            _mailer.Send(mailMessage);
-            return RedirectToAction("Index");
-
         }
     }
 }
