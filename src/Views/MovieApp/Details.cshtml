@@ -1,4 +1,4 @@
-@model MvcMovie.Models.Movie
+@model MvcMovie.Models.DetailsViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -49,4 +49,25 @@
     </tr>
     </tbody>
 </table>
+<input name="detailsMovieId" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Id)" hidden="true" >
+<input name="detailsMovieTitle" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Title)" hidden="true" >
+<input name="detailsMovieReleaseDate" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.ReleaseDate)" hidden="true" >
+<input name="detailsMovieGenre" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Genre)" hidden="true" >
+<input name="detailsMoviePrice" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Price)" hidden="true" >
+<input name="detailsMovieRating" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Rating)" hidden="true" >
+<label class="control-label" id="valiToken" type="hidden">@Html.AntiForgeryToken()</label>
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" id="nameDetails" />
+    <span asp-validation-for="Name" class="text-danger" ></span>
+</div>
+<div class="form-group">
+    <label asp-for="Adress" class="control-label"></label>
+    <input asp-for="Adress" class="form-control" id="adressDetails" />
+    <span asp-validation-for="Adress" class="text-danger" ></span>
+</div>
+<div class="form-group">
+    <input value="Send" class="emailBtm" id="emailDetailsBtm" />
+</div>
+
 @Html.ActionLink("Back to List", "Index")
