@@ -33,6 +33,6 @@ namespace MvcMovie.Models
         [Required]
         public string Rating { get; set; }
 
-        public ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
