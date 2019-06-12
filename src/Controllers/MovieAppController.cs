@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
+using src.Models;
+using System.Diagnostics;
+using Mailer;
 
 namespace MvcMovie.Controllers
 {
@@ -14,12 +17,17 @@ namespace MvcMovie.Controllers
     public class MovieAppController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailService _mailer;
+        private IUnitOfWork unitOfWork;
 
-        public MovieAppController(IUnitOfWork unitOfWork)
+        public IEmailService Mailer => this._mailer;
+
+        public MovieAppController(IUnitOfWork unitOfWork, IEmailService mailer)
         {
             this._unitOfWork = unitOfWork;
+            _mailer = mailer;
         }
-        
+
         public IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
@@ -158,9 +166,12 @@ namespace MvcMovie.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(UnitOfWork.Movies.Get(id));
+            Movie movie = UnitOfWork.Movies.Get(id);
+            DetailsViewModel detailsVM = new DetailsViewModel(movie);
+            return View(detailsVM);
         }
 
         [HttpGet]
