@@ -45,7 +45,6 @@ $(function(){
         mail.Adress = $('#adressDetails').val();
         mail.Body = ('Id: ' + $('[name=detailsMovieId]').val() + ' Title: ' + $('[name=detailsMovieTitle]').val() + ' Release Date: ' + $('[name=detailsMovieReleaseDate]').val() + ' Genre: ' + $('[name=detailsMovieGenre]').val() + ' Price: ' + $('[name=detailsMoviePrice]').val() + ' Rating: ' + $('[name=detailsMovieRating]').val() );
         mail.Subject = ('Information of the movie ' + $('[name=detailsMovieTitle]').val());
-        alert(mail.Body);
         var tokenVal = $('[name=__RequestVerificationToken]').val();
         $.ajax({  
             type: "POST",  
