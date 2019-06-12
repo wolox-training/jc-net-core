@@ -21,16 +21,10 @@ namespace MvcMovie.Controllers
 		[ValidateAntiForgeryToken]
 		public string Comment(CommentViewModel commentVM)
 		{
-			Comment comment = new Comment();
-			comment.Title = commentVM.Title;
-			comment.Content = commentVM.Content;
-			comment.ReleaseDate = DateTime.Now;
-			comment.MovieID = commentVM.MovieId;
-
+			Comment comment = new Comment(commentVM);
 		    UnitOfWork.Comments.Update(comment);
 		    UnitOfWork.Complete();
-            return ("Se agrego con éxito");
+            return ("Ok");
 		}
-
     }
 }

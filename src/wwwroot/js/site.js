@@ -1,29 +1,26 @@
 ﻿$(function(){
-    var tableBody = $('#ListComments tbody');
-    var urlC = '/api/v1/MovieApiController/Comment';
-    $('#buttonComment').click(function() {
-
-        var comment = new Object();
-        comment.Title=$('#comTitle').val();
-        comment.Content=$('#comContent').val();
-        comment.ReleaseDate = new Date();
-        var dataC = (comment.ReleaseDate.getMonth() + 1) + '/' + comment.ReleaseDate.getDate() + '/' +  comment.ReleaseDate.getFullYear();
-        comment.MovieId =$('[name=comMovieId]').val();
+    var urlContact = '/api/v1/HomeApiController/Contact';
+    $('#emailBtm').click(function() {
+        var mail = new Object();
+        mail.Name = $('#nameContact').val();
+        mail.Adress = $('#adressContact').val();
+        mail.Subject = $('#subjectContact').val();
+        mail.Body = $('#bodyContact').val();
         var tokenVal = $('[name=__RequestVerificationToken]').val();
-
-        if (comment.Title != '' && comment.Content !='')
-            tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');
-
         $.ajax({  
             type: "POST",  
-            url: urlC,  
+            url: urlContact,  
             data: {
-                __RequestVerificationToken: tokenVal,  
-                commentVM: comment
-            },      
+                __RequestVerificationToken: tokenVal,
+                email : mail
+            },
             success: function(response) {  
                 if (response != null) {  
-                    alert("Success");  
+                    alert("The mail was send succesfully");
+                    $('#nameContact').val('');
+                    $('#adressContact').val('');
+                    $('#subjectContact').val('');
+                    $('#bodyContact').val('');
                 } else {  
                     alert("Something went wrong");  
                 }  
@@ -39,3 +36,41 @@
     });
 
 }); 
+
+$(function(){
+    var tableBody = $('#ListComments tbody');
+    var urlC = '/api/v1/MovieApiController/Comment';
+    $('#buttonComment').click(function() {
+        var comment = new Object();
+        comment.Title=$('#comTitle').val();
+        comment.Content=$('#comContent').val();
+        comment.ReleaseDate = new Date();
+        var dataC = (comment.ReleaseDate.getMonth() + 1) + '/' + comment.ReleaseDate.getDate() + '/' +  comment.ReleaseDate.getFullYear();
+        comment.MovieId =$('[name=comMovieId]').val();
+        var tokenVal = $('[name=__RequestVerificationToken]').val();
+        $.ajax({  
+            type: "POST",  
+            url: urlC,  
+            data: {
+                __RequestVerificationToken: tokenVal,  
+                commentVM: comment
+            },      
+            success: function(response) {  
+                if (response != null) {
+                    tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');  
+                    alert("Success");  
+                } else {  
+                    alert("Something went wrong");  
+                }  
+            },  
+            failure: function(response) {  
+                alert('fail');  
+            },  
+            error: function(response,status,error) {  
+                alert('Status: ' + status + ' Error: ' + error);   
+            }  
+        });  
+
+    });
+
+});
