@@ -6,9 +6,15 @@ namespace MvcMovie.Models
 {
     public class CommentViewModel
     {
+        public CommentViewModel(){ }
+        public CommentViewModel(IEnumerable<Comment> comments, Movie movie)
+        {
+            this.Comments = comments;
+            this.movie = movie;
+        }
         public Movie movie {get; set; }
 
-        public ICollection<Comment> Comments {get; set; }
+        public IEnumerable<Comment> Comments {get; set; }
 
         [StringLength(60, MinimumLength = 3)]
         [Required]

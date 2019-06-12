@@ -9,6 +9,7 @@ using System.Linq;
 using src.Models;
 using System.Diagnostics;
 using Mailer;
+using Microsoft.EntityFrameworkCore;
 
 namespace MvcMovie.Controllers
 {
@@ -182,11 +183,9 @@ namespace MvcMovie.Controllers
 		    {
 		        return NotFound();
 		    }
-            var comment = UnitOfWork.Comments.GetAll();
-            CommentViewModel commentVM = new CommentViewModel();
-            commentVM.movie=movie;
-            commentVM.Comments = comment.Where(c => c.MovieID == id).ToList();
-
+            var comments = UnitOfWork.Comments.GetAll();
+            comments = movie.Comments;
+            CommentViewModel commentVM = new CommentViewModel(comments,movie);
 		    return View(commentVM);
 		}
 
