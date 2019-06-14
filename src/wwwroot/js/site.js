@@ -68,10 +68,6 @@
             alert ('Complete all the fields');
         }
     });
-
-}); 
-
-$(function(){
     var tableBody = $('#ListComments tbody');
     var urlC = '/api/v1/MovieApiController/Comment';
     $('#buttonComment').click(function() {
@@ -91,7 +87,7 @@ $(function(){
             },      
             success: function(response) {  
                 if (response != null) {
-                    tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');  
+                    tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');
                     alert("Success");  
                 } else {  
                     alert("Something went wrong");  
