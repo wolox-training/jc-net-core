@@ -88,6 +88,8 @@
             success: function(response) {  
                 if (response != null) {
                     tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');
+                    $('#comTitle').val('');
+                    $('#comContent').val('');
                     alert("Success");  
                 } else {  
                     alert("Something went wrong");  
