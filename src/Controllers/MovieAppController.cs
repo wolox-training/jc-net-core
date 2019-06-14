@@ -183,9 +183,8 @@ namespace MvcMovie.Controllers
 		        return NotFound();
 		    }
             var comments = UnitOfWork.Comments.GetAll();
-            comments = movie.Comments;
-            CommentViewModel commentVM = new CommentViewModel(comments,movie);
-		    return View(commentVM);
+            MovieViewModel movieVM = new MovieViewModel(movie);
+		    return View(movieVM);
 		}
     }
 }
