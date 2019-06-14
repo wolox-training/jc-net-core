@@ -170,8 +170,8 @@ namespace MvcMovie.Controllers
         public IActionResult Details(int id)
         {
             Movie movie = UnitOfWork.Movies.Get(id);
-            DetailsViewModel detailsVM = new DetailsViewModel(movie);
-            return View(detailsVM);
+            MovieViewModel MovieVM = new MovieViewModel(movie);
+            return View(MovieVM);
         }
 
         [HttpGet]
