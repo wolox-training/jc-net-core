@@ -29,32 +29,26 @@
     <tbody>
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Id)
+            <output name="detailsMovieId" class="label" >@Html.DisplayFor(modelItem => modelItem.Id)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Title)
+            <output name="detailsMovieTitle" class="label" >@Html.DisplayFor(modelItem => modelItem.Title)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
+            <output name="detailsMovieReleaseDate" class="label" >@Html.DisplayFor(modelItem => modelItem.ReleaseDate)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Genre)
+            <output name="detailsMovieGenre" class="label" >@Html.DisplayFor(modelItem => modelItem.Genre)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Price)
+            <output name="detailsMoviePrice" class="label" >@Html.DisplayFor(modelItem => modelItem.Price)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Rating)
+            <output name="detailsMovieRating" class="label" >@Html.DisplayFor(modelItem => modelItem.Rating)</label>
         </td>
     </tr>
     </tbody>
 </table>
-<input name="detailsMovieId" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Id)" hidden="true" >
-<input name="detailsMovieTitle" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Title)" hidden="true" >
-<input name="detailsMovieReleaseDate" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.ReleaseDate)" hidden="true" >
-<input name="detailsMovieGenre" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Genre)" hidden="true" >
-<input name="detailsMoviePrice" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Price)" hidden="true" >
-<input name="detailsMovieRating" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Rating)" hidden="true" >
 <label class="control-label" id="valiToken" type="hidden">@Html.AntiForgeryToken()</label>
 <div class="form-group">
     <label class="label">Name</label>

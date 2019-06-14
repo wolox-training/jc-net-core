@@ -34,10 +34,6 @@
         });  
 
     });
-
-});
-
-$(function(){
     var urlDetails = '/api/v1/MovieApiController/Details';
     $('#emailDetailsBtm').click(function() {
         var mail = new Object();
