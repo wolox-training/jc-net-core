@@ -1,4 +1,4 @@
-@model MvcMovie.Models.DetailsViewModel
+@model MvcMovie.Models.MovieViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -7,64 +7,62 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MovieViewModel.Id)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MovieViewModel.Title)
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MovieViewModel.ReleaseDate)
+                @Html.DisplayNameFor(model => model.ReleaseDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MovieViewModel.Genre)
+                @Html.DisplayNameFor(model => model.Genre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MovieViewModel.Price)
+                @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MovieViewModel.Rating)
+                @Html.DisplayNameFor(model => model.Rating)
             </th>
         </tr>
     </thead>
     <tbody>
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.MovieViewModel.Id)
+            @Html.DisplayFor(modelItem => modelItem.Id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.MovieViewModel.Title)
+            @Html.DisplayFor(modelItem => modelItem.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.MovieViewModel.ReleaseDate)
+            @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.MovieViewModel.Genre)
+            @Html.DisplayFor(modelItem => modelItem.Genre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.MovieViewModel.Price)
+            @Html.DisplayFor(modelItem => modelItem.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.MovieViewModel.Rating)
+            @Html.DisplayFor(modelItem => modelItem.Rating)
         </td>
     </tr>
     </tbody>
 </table>
-<input name="detailsMovieId" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.MovieViewModel.Id)" hidden="true" >
-<input name="detailsMovieTitle" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.MovieViewModel.Title)" hidden="true" >
-<input name="detailsMovieReleaseDate" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.MovieViewModel.ReleaseDate)" hidden="true" >
-<input name="detailsMovieGenre" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.MovieViewModel.Genre)" hidden="true" >
-<input name="detailsMoviePrice" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.MovieViewModel.Price)" hidden="true" >
-<input name="detailsMovieRating" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.MovieViewModel.Rating)" hidden="true" >
+<input name="detailsMovieId" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Id)" hidden="true" >
+<input name="detailsMovieTitle" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Title)" hidden="true" >
+<input name="detailsMovieReleaseDate" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.ReleaseDate)" hidden="true" >
+<input name="detailsMovieGenre" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Genre)" hidden="true" >
+<input name="detailsMoviePrice" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Price)" hidden="true" >
+<input name="detailsMovieRating" class="control-label" value="@Html.DisplayFor(modelItem => modelItem.Rating)" hidden="true" >
 <label class="control-label" id="valiToken" type="hidden">@Html.AntiForgeryToken()</label>
 <div class="form-group">
-    <label asp-for="EmailVM.Name" class="control-label"></label>
-    <input asp-for="EmailVM.Name" class="form-control" id="nameDetails" />
-    <span asp-validation-for="EmailVM.Name" class="text-danger" ></span>
+    <label class="label">Name</label>
+    <input class="form-control" id="nameDetails" />
 </div>
 <div class="form-group">
-    <label asp-for="EmailVM.Adress" class="control-label"></label>
-    <input asp-for="EmailVM.Adress" class="form-control" id="adressDetails" />
-    <span asp-validation-for="EmailVM.Adress" class="text-danger" ></span>
+    <label class="label">Adress</label>
+    <input class="form-control" id="adressDetails" />
 </div>
 <div class="form-group">
     <input value="Send" type="button" class="emailBtm" id="emailDetailsBtm" />

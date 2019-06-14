@@ -158,9 +158,7 @@ namespace MvcMovie.Controllers
         {
             Movie movie = UnitOfWork.Movies.Get(id);
             MovieViewModel MovieVM = new MovieViewModel(movie);
-            DetailsViewModel DetailsVM = new DetailsViewModel();
-            DetailsVM.MovieViewModel = MovieVM;
-            return View(DetailsVM);
+            return View(MovieVM);
         }
     }
 }
