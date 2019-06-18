@@ -1,4 +1,4 @@
-@model MvcMovie.Models.Movie
+@model MvcMovie.Models.MovieViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -29,24 +29,37 @@
     <tbody>
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Id)
+            <output name="detailsMovieId" class="label" >@Html.DisplayFor(modelItem => modelItem.Id)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Title)
+            <output name="detailsMovieTitle" class="label" >@Html.DisplayFor(modelItem => modelItem.Title)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.ReleaseDate)
+            <output name="detailsMovieReleaseDate" class="label" >@Html.DisplayFor(modelItem => modelItem.ReleaseDate)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Genre)
+            <output name="detailsMovieGenre" class="label" >@Html.DisplayFor(modelItem => modelItem.Genre)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Price)
+            <output name="detailsMoviePrice" class="label" >@Html.DisplayFor(modelItem => modelItem.Price)</label>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => modelItem.Rating)
+            <output name="detailsMovieRating" class="label" >@Html.DisplayFor(modelItem => modelItem.Rating)</label>
         </td>
     </tr>
     </tbody>
 </table>
+<label class="control-label" id="valiToken" type="hidden">@Html.AntiForgeryToken()</label>
+<div class="form-group">
+    <label class="label">Name</label>
+    <input class="form-control" id="nameDetails" />
+</div>
+<div class="form-group">
+    <label class="label">Adress</label>
+    <input class="form-control" id="adressDetails" />
+</div>
+<div class="form-group">
+    <input value="Send" type="button" class="emailBtm" id="emailDetailsBtm" />
+</div>
+
 @Html.ActionLink("Back to List", "Index")

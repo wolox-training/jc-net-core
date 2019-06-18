@@ -1,0 +1,40 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization;
+@model MvcMovie.Models.EmailViewModel;
+
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["ContactPage"];
+    ViewData["Message"] = Localizer["ContactMessage"];
+}
+
+<form asp-action="Contact">
+    <h1>@ViewData["Title"]</h1>
+    <p>@ViewData["Message"]</p>
+    <p>Testing Mail</p>
+    <label class="control-label" id="valiToken" type="hidden">@Html.AntiForgeryToken()</label>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" id="nameContact" />
+        <span asp-validation-for="Name" class="text-danger" ></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Adress" class="control-label"></label>
+        <input asp-for="Adress" class="form-control" id="adressContact" />
+        <span asp-validation-for="Adress" class="text-danger" ></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Subject" class="control-label"></label>
+        <input asp-for="Subject" class="form-control" id="subjectContact" />
+        <span asp-validation-for="Subject" class="text-danger" ></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Body" class="control-label"></label>
+        <input asp-for="Body" class="form-control" id="bodyContact" />
+        <span asp-validation-for="Body" class="text-danger" ></span>
+    </div>
+    <div class="form-group">
+        <input value="Send" type="button" class="emailBtm" id="emailBtm" />
+    </div>
+</form>

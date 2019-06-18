@@ -4,6 +4,11 @@ using src.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
 using MvcMovie.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
+using System.Net;
+using Mailer;
+using MvcMovie.Models;
+using System;
 
 namespace MvcMovie.Controllers
 {
@@ -22,10 +27,23 @@ namespace MvcMovie.Controllers
         }
 
         private readonly IHtmlLocalizer<HomeController> _localizer;
+        private readonly IEmailService _mailer;
+        public IHtmlLocalizer<HomeController> Localizer => this._localizer;
+        public IEmailService Mailer => this._mailer;
 
-        public HomeController(IHtmlLocalizer<HomeController> localizer) => this._localizer = localizer;
+        public HomeController(IHtmlLocalizer<HomeController> localizer,IEmailService mailer)
+        {
+            this._localizer = localizer;
+            _mailer = mailer;
+        } 
 
         [Authorize]
         public IActionResult Privacy() => View();
+
+        [HttpGet]
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }
