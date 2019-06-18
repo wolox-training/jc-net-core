@@ -22,9 +22,7 @@ namespace MvcMovie.Models
 
         public int MovieID { get; set; }
         public virtual Movie Movie { get; set; }
-
         public Comment(){ }
-
         public Comment(CommentViewModel commentVM)
         {
 			this.Title = commentVM.Title;
