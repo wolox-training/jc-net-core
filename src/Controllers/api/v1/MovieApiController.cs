@@ -34,7 +34,5 @@ namespace MvcMovie.Controllers
             Mailer.Send(mailMessage);
             return Ok("Success");
         }
-
-
     }
 }
