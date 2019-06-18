@@ -14,6 +14,7 @@ namespace MvcMovie.Controllers
 {
     public class HomeController : Controller
     {
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Index()
         {
             ViewData["Message"] = _localizer["HomePage"];
@@ -21,6 +22,7 @@ namespace MvcMovie.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
@@ -38,6 +40,7 @@ namespace MvcMovie.Controllers
         } 
 
         [Authorize]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Privacy() => View();
 
         [HttpGet]
