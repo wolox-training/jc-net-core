@@ -180,9 +180,7 @@ namespace MvcMovie.Controllers
 		{
 		    var movie = UnitOfWork.Movies.Get(id);
 		    if (movie == null)
-		    {
 		        return NotFound();
-		    }
             var comments = UnitOfWork.Comments.GetAll();
             comments = movie.Comments;
             CommentViewModel commentVM = new CommentViewModel(comments,movie);
@@ -193,6 +191,9 @@ namespace MvcMovie.Controllers
 		[ValidateAntiForgeryToken]
 		public IActionResult Comment(int id, Comment comment)
 		{
+            var movie = UnitOfWork.Movies.Get(id);
+            if (movie == null)
+                return NotFound();
 		    if (ModelState.IsValid)
 		    {
 		        comment.ReleaseDate = DateTime.Now;
