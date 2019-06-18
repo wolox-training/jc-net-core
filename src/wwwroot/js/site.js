@@ -74,8 +74,8 @@
         var comment = new Object();
         comment.Title=$('#comTitle').val();
         comment.Content=$('#comContent').val();
-        comment.ReleaseDate = new Date();
-        var dataC = (comment.ReleaseDate.getMonth() + 1) + '/' + comment.ReleaseDate.getDate() + '/' +  comment.ReleaseDate.getFullYear();
+        comment.CreatedAt = new Date();
+        var dataC = (comment.CreatedAt.getMonth() + 1) + '/' + comment.CreatedAt.getDate() + '/' +  comment.CreatedAt.getFullYear();
         comment.MovieId =$('[name=comMovieId]').val();
         var tokenVal = $('[name=__RequestVerificationToken]').val();
         $.ajax({  
