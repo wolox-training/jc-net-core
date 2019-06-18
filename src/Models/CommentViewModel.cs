@@ -7,14 +7,13 @@ namespace MvcMovie.Models
     public class CommentViewModel
     {
         public CommentViewModel(){ }
-        public CommentViewModel(IEnumerable<Comment> comments, Movie movie)
+        public CommentViewModel(Comment c)
         {
-            this.Comments = comments;
-            this.movie = movie;
+            this.Title = c.Title;
+            this.Content = c.Content;
+            this.ReleaseDate = c.ReleaseDate;
+            this.MovieId = c.MovieID;
         }
-        public Movie movie {get; set; }
-
-        public IEnumerable<Comment> Comments {get; set; }
 
         [StringLength(60, MinimumLength = 3)]
         [Required]
@@ -27,5 +26,6 @@ namespace MvcMovie.Models
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
+        public int MovieId { get; set; }
     }
 }

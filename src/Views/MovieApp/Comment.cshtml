@@ -1,4 +1,4 @@
-@model MvcMovie.Models.CommentViewModel
+@model MvcMovie.Models.MovieViewModel
 @using Microsoft.AspNetCore.Mvc.Localization
 
 @{
@@ -11,13 +11,13 @@
         <thead>
             <tr>
                 <th>
-                    <a asp-action="Comment"> @Html.DisplayNameFor(model => model.Title)</a>
+                    Title
                 </th>
                 <th>
-                    <a asp-action="Comment"> @Html.DisplayNameFor(model => model.Content)</a>
+                    Content
                 </th>
                 <th>
-                    <a asp-action="Comment"> @Html.DisplayNameFor(model => model.ReleaseDate)</a>
+                    Release Date
                 </th>
             </tr>
         </thead>
@@ -43,17 +43,18 @@
 <form asp-action="Comment">
     <h1>Comments</h1>
     <p>Talk about the movie</p>
-    <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Content" class="control-label"></label>
-        <input asp-for="Content" class="form-control" />
-        <span asp-validation-for="Content" class="text-danger"></span>
-    </div>
+    @using(Html.BeginForm())
+    {
+        <div class="form-group">
+            <label class="control-label">Title</label>
+            <input class="form-control" name="title" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Content</label>
+            <input class="form-control" name="content" />
+        </div>
     <div class="form-group">
         <input type="submit" value="Send" class="btn btn-primary" />
     </div>
+    }
 </form>

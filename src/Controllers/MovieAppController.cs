@@ -182,27 +182,29 @@ namespace MvcMovie.Controllers
 		    if (movie == null)
 		        return NotFound();
             var comments = UnitOfWork.Comments.GetAll();
-            comments = movie.Comments;
-            CommentViewModel commentVM = new CommentViewModel(comments,movie);
-		    return View(commentVM);
+            MovieViewModel movieVM = new MovieViewModel(movie);
+		    return View(movieVM);
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Comment(int id, Comment comment)
+		public IActionResult Comment(int id, string title, string content)
 		{
             var movie = UnitOfWork.Movies.Get(id);
             if (movie == null)
                 return NotFound();
 		    if (ModelState.IsValid)
 		    {
+                Comment comment = new Comment();
+                comment.Title = title;
+                comment.Content = content;
 		        comment.ReleaseDate = DateTime.Now;
                 comment.MovieID = id;
 		        UnitOfWork.Comments.Update(comment);
 		        UnitOfWork.Complete();
 		        return RedirectToAction("Index");
 		    }
-		    return View(comment);
+		    return View();
 		}
     }
 }

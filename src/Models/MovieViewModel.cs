@@ -15,6 +15,7 @@ namespace MvcMovie.Models
             Genre = m.Genre;
             Price = m.Price;
             Rating = m.Rating;
+            Comments = m.Comments;
         }
         public int Id { get; set; }
 
@@ -41,6 +42,6 @@ namespace MvcMovie.Models
         [Required]
         public string Rating { get; set; }
 
-        public ICollection<CommentViewModel> Comment { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }
