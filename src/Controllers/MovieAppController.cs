@@ -179,9 +179,7 @@ namespace MvcMovie.Controllers
 		{
 		    var movie = UnitOfWork.Movies.Get(id);
 		    if (movie == null)
-		    {
 		        return NotFound();
-		    }
             var comments = UnitOfWork.Comments.GetAll();
             MovieViewModel movieVM = new MovieViewModel(movie);
 		    return View(movieVM);

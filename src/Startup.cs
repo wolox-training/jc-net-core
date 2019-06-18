@@ -13,6 +13,8 @@ using MvcMovie.Models;
 using MvcMovie.Repositories.Interfaces;
 using System;
 using Mailer;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Linq;
 
 namespace src
 {
@@ -87,7 +89,29 @@ namespace src
 
             services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
 	        services.AddTransient<IEmailService, EmailService>();
-
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "MvcMovie API",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = "None",
+                    Contact = new Contact
+                    {
+                        Name = "Shayne Boyer",
+                        Email = string.Empty,
+                        Url = "https://twitter.com/spboyer"
+                    },
+                    License = new License
+                    {
+                        Name = "Use under LICX",
+                        Url = "https://example.com/license"
+                    }
+                });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            });
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -112,6 +136,12 @@ namespace src
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseMvc(routes =>
             {
