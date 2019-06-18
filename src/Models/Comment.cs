@@ -5,8 +5,7 @@ namespace MvcMovie.Models
 {
     public class Comment
     {
-        [Key]
-        public int CommentId { get; set; }
+        public int Id { get; set; }
 
         [StringLength(60, MinimumLength = 3)]
         [Required]
@@ -18,9 +17,10 @@ namespace MvcMovie.Models
 
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public int MovieID { get; set; }
+        [Required]
+        public int MovieId { get; set; }
         public virtual Movie Movie { get; set; }
         public Comment(){ }
 
@@ -28,8 +28,8 @@ namespace MvcMovie.Models
         {
 			this.Title = commentVM.Title;
 			this.Content = commentVM.Content;
-			this.ReleaseDate = DateTime.Now;
-			this.MovieID = commentVM.MovieId;
+			this.CreatedAt = DateTime.Now;
+			this.MovieId = commentVM.MovieId;
         }
     }
 }

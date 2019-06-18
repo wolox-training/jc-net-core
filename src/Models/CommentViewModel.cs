@@ -11,8 +11,8 @@ namespace MvcMovie.Models
         {
             this.Title = c.Title;
             this.Content = c.Content;
-            this.ReleaseDate = c.ReleaseDate;
-            this.MovieId = c.MovieID;
+            this.CreatedAt = c.CreatedAt;
+            this.MovieId = c.MovieId;
         }
 
         [StringLength(60, MinimumLength = 3)]
@@ -23,9 +23,11 @@ namespace MvcMovie.Models
         [Required]
         public string Content { get; set; }
 
-        [Display(Name = "Release Date")]
+        [Display(Name = "Created At")]
         [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime CreatedAt { get; set; }
+        
+        [Required]
         public int MovieId { get; set; }
     }
 }

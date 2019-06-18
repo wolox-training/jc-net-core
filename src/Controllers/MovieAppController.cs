@@ -198,8 +198,8 @@ namespace MvcMovie.Controllers
                 Comment comment = new Comment();
                 comment.Title = title;
                 comment.Content = content;
-		        comment.ReleaseDate = DateTime.Now;
-                comment.MovieID = id;
+		        comment.CreatedAt = DateTime.Now;
+                comment.MovieId = id;
 		        UnitOfWork.Comments.Update(comment);
 		        UnitOfWork.Complete();
 		        return RedirectToAction("Index");
