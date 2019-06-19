@@ -10,6 +10,9 @@ namespace MvcMovie.Repositories
     {
         public MovieRepository(MvcMovieContext context) : base(context)
         {
+                var movies = context.Movies
+                    .Include(m => m.Comments)
+                    .ToList();
         }
 
         public MvcMovieContext MvcMovieContext
