@@ -15,18 +15,16 @@ namespace MvcMovie.Controllers
 
         private readonly IEmailService _mailer;
 
-        public MovieApiController(IUnitOfWork unitOfWork, IEmailService mailer) : base(unitOfWork, mailer)
-        {
-        }
+        public MovieApiController(IUnitOfWork unitOfWork, IEmailService mailer) : base(unitOfWork, mailer) { }
 
         [HttpPost("Comment")]
         [ValidateAntiForgeryToken]
-        public string Comment(CommentViewModel commentVM)
+        public IActionResult Comment(CommentViewModel commentVM)
         {
             Comment comment = new Comment(commentVM);
-            UnitOfWork.Comments.Update(comment);
+            UnitOfWork.Comments.Add(comment);
             UnitOfWork.Complete();
-            return ("Ok");
+            return Ok("Success");
         }
 
         [HttpPost("Details")]

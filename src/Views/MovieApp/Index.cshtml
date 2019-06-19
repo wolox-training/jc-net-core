@@ -6,7 +6,7 @@
 
 <h2>Movie App</h2>
 <a asp-action="Create">Create New</a>
-<form asp-controller=" asp-action="Index" method="get">
+<form asp-controller="MovieAppController" asp-action="Index" method="get">
     <p>
         <select asp-for="MovieGenre" asp-items="Model.Genres">
             <option value="">All</option>
