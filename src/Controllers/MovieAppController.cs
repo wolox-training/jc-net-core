@@ -9,6 +9,7 @@ using System.Linq;
 using src.Models;
 using System.Diagnostics;
 using Mailer;
+using Microsoft.EntityFrameworkCore;
 
 namespace MvcMovie.Controllers
 {
@@ -173,5 +174,37 @@ namespace MvcMovie.Controllers
             MovieViewModel MovieVM = new MovieViewModel(movie);
             return View(MovieVM);
         }
+
+        [HttpGet]
+		public IActionResult Comment(int id)
+		{
+		    var movie = UnitOfWork.Movies.Get(id);
+		    if (movie == null)
+		        return NotFound();
+            var comments = UnitOfWork.Comments.GetAll();
+            MovieViewModel movieVM = new MovieViewModel(movie);
+		    return View(movieVM);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Comment(int id, string title, string content)
+		{
+            var movie = UnitOfWork.Movies.Get(id);
+            if (movie == null)
+                return NotFound();
+		    if (ModelState.IsValid)
+		    {
+                Comment comment = new Comment();
+                comment.Title = title;
+                comment.Content = content;
+		        comment.CreatedAt = DateTime.Now;
+                comment.MovieId = id;
+		        UnitOfWork.Comments.Update(comment);
+		        UnitOfWork.Complete();
+		        return RedirectToAction("Index");
+		    }
+		    return View();
+		}
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcMovie.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace src.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    partial class MvcMovieContextModelSnapshot : ModelSnapshot
+    [Migration("20190612180627_MvcMovieContextCommentFixed")]
+    partial class MvcMovieContextCommentFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,24 +184,24 @@ namespace src.Migrations
 
             modelBuilder.Entity("MvcMovie.Models.Comment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<DateTime>("CreatedAt");
+                    b.Property<int>("MovieID");
 
-                    b.Property<int>("MovieId");
+                    b.Property<DateTime>("ReleaseDate");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(60);
 
-                    b.HasKey("Id");
+                    b.HasKey("CommentId");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("MovieID");
 
                     b.ToTable("Comments");
                 });
@@ -280,7 +282,7 @@ namespace src.Migrations
                 {
                     b.HasOne("MvcMovie.Models.Movie", "Movie")
                         .WithMany("Comments")
-                        .HasForeignKey("MovieId")
+                        .HasForeignKey("MovieID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
