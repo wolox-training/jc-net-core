@@ -5,5 +5,6 @@ namespace MvcMovie.Repositories.Interfaces
 {
     public interface IMovieRepository : IRepository<Movie>
     {
+        Movie Get (int id);
     }
 }

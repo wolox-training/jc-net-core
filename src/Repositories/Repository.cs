@@ -16,7 +16,7 @@ namespace MvcMovie.Repositories
             Context = context;
         }
 
-        public TEntity Get(int id)
+        public virtual TEntity Get(int id)
         {
             return Context.Set<TEntity>().Find(id);
         }
