@@ -9,7 +9,6 @@ namespace MvcMovie.Models
 {
     public class PaginatedList<T> : List<T>
     {
-        public List<Movie> Movies { get; set; }
         public SelectList Genres { get; set; }
         public string MovieGenre { get; set; }
         public string SearchString { get; set; }

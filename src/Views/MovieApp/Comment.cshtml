@@ -4,10 +4,16 @@
 @{
     ViewData["Title"] =  "Home Page";
 }
-@if (Model.Comments !=null)
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
 {
+    @Html.AntiForgeryToken()
+}
+
+    @if (Model.Comments !=null)
+    {
     <h1>List of Comments</h1>
-    <table class="table">
+    <table class="table" id="ListComments">
         <thead>
             <tr>
                 <th>
@@ -38,23 +44,20 @@
                 }
         </tbody>
     </table>
-}
+    }
 
-<form asp-action="Comment">
     <h1>Comments</h1>
     <p>Talk about the movie</p>
-    @using(Html.BeginForm())
-    {
-        <div class="form-group">
-            <label class="control-label">Title</label>
-            <input class="form-control" name="title" />
-        </div>
-        <div class="form-group">
-            <label class="control-label">Content</label>
-            <input class="form-control" name="content" />
-        </div>
+    <label class="control-label" id="valiToken" type="hidden">@Html.AntiForgeryToken()</label>
+    <input type="hidden" name="comMovieId" value="@Html.DisplayFor(modelItem => modelItem.Id)">
     <div class="form-group">
-        <input type="submit" value="Send" class="btn btn-primary" />
+        <label class="control-label">Title</label>
+        <input class="form-control" id="comTitle"/>
     </div>
-    }
-</form>
+    <div class="form-group">
+        <label class="control-label">Content</label>
+        <input class="form-control" id="comContent"/>
+    </div>
+    <div class="form-group">
+        <input type="button" value="Send" class="btn btn-primary" id="buttonComment"/>
+    </div>

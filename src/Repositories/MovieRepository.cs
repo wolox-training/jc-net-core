@@ -8,13 +8,11 @@ namespace MvcMovie.Repositories
 {
     public class MovieRepository : Repository<Movie>, IMovieRepository
     {
-        public MovieRepository(MvcMovieContext context) : base(context)
-        {
-        }
+        public MovieRepository(MvcMovieContext context) : base(context) { }
 
-        public MvcMovieContext MvcMovieContext
+        public override Movie Get (int id)
         {
-            get { return Context as MvcMovieContext; }
+            return Context.Movies.Include(m => m.Comments).First(m => m.Id == id);
         }
     }
 }

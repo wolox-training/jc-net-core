@@ -15,7 +15,7 @@ namespace MvcMovie.Models
             Genre = m.Genre;
             Price = m.Price;
             Rating = m.Rating;
-            Comments = m.Comments;
+            this.Comments = m.Comments;
         }
         public int Id { get; set; }
 

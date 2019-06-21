@@ -68,5 +68,47 @@
             alert ('Complete all the fields');
         }
     });
+    var tableBody = $('#ListComments tbody');
+    var urlC = '/api/v1/MovieApiController/Comment';
+    $('#buttonComment').click(function() {
+        var comment = new Object();
+        comment.Title=$('#comTitle').val();
+        comment.Content=$('#comContent').val();
+        comment.CreatedAt = new Date();
+        var dataC = (comment.CreatedAt.getMonth() + 1) + '/' + comment.CreatedAt.getDate() + '/' +  comment.CreatedAt.getFullYear();
+        comment.MovieId =$('[name=comMovieId]').val();
+        var tokenVal = $('[name=__RequestVerificationToken]').val();
+        if (comment.Title!='' && comment.Content!='')
+        {
+            $.ajax({  
+                type: "POST",  
+                url: urlC,  
+                data: {
+                    __RequestVerificationToken: tokenVal,  
+                    commentVM: comment
+                },      
+                success: function(response) {  
+                    if (response != null) {
+                        tableBody.append('<tr> <td>' + comment.Title + '</td>' + '<td>' + comment.Content + '</td>' + '<td>' + dataC + '</td> <tr>');
+                        $('#comTitle').val('');
+                        $('#comContent').val('');
+                        alert("Success");  
+                    } else { 
+                        alert("Something went wrong");  
+                    }  
+                },  
+                failure: function(response) {  
+                    alert('fail');  
+                },  
+                error: function(response,status,error) {  
+                    alert('Status: ' + status + ' Error: ' + error);   
+                }  
+            });
+        }
+        else{
+            alert('There are empty fields');
+        }  
 
-}); 
+    });
+
+});

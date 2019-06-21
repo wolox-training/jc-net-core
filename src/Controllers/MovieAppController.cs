@@ -6,10 +6,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
-using src.Models;
-using System.Diagnostics;
 using Mailer;
-using Microsoft.EntityFrameworkCore;
 
 namespace MvcMovie.Controllers
 {
@@ -87,7 +84,6 @@ namespace MvcMovie.Controllers
             int  pageSize = 3;
             var Genres = new SelectList(genresquery.Distinct().ToList());
             var moviePage = PaginatedList<Movie>.Create(movies.ToList(),pageNumber ?? 1,pageSize,Genres);
-            moviePage.Movies = movies.ToList();
             return View(moviePage);
         }
 
@@ -176,35 +172,12 @@ namespace MvcMovie.Controllers
         }
 
         [HttpGet]
-		public IActionResult Comment(int id)
-		{
-		    var movie = UnitOfWork.Movies.Get(id);
-		    if (movie == null)
-		        return NotFound();
-            var comments = UnitOfWork.Comments.GetAll();
-            MovieViewModel movieVM = new MovieViewModel(movie);
-		    return View(movieVM);
-		}
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public IActionResult Comment(int id, string title, string content)
-		{
+        public IActionResult Comment(int id)
+        {
             var movie = UnitOfWork.Movies.Get(id);
             if (movie == null)
                 return NotFound();
-		    if (ModelState.IsValid)
-		    {
-                Comment comment = new Comment();
-                comment.Title = title;
-                comment.Content = content;
-		        comment.CreatedAt = DateTime.Now;
-                comment.MovieId = id;
-		        UnitOfWork.Comments.Update(comment);
-		        UnitOfWork.Complete();
-		        return RedirectToAction("Index");
-		    }
-		    return View();
-		}
+            return View(new MovieViewModel(movie));
+        }
     }
 }

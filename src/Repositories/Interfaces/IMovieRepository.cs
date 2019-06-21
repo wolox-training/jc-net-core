@@ -3,7 +3,5 @@ using MvcMovie.Models;
 
 namespace MvcMovie.Repositories.Interfaces
 {
-    public interface IMovieRepository : IRepository<Movie>
-    {
-    }
+    public interface IMovieRepository : IRepository<Movie> { }
 }
