@@ -9,21 +9,9 @@ namespace MvcMovie.Repositories
     {
         public MovieRepository(MvcMovieContext context) : base(context) { }
 
-        public MvcMovieContext MvcMovieContext
-        {
-            get { return Context as MvcMovieContext; }
-        }
-
-        public void IncludeComments()
-        {
-            Context.Set<Movie>().Include(m => m.Comments).ToList();;
-        }
-
         public override Movie Get (int id)
         {
-            Movie m = Context.Set<Movie>().Find(id);
-            IncludeComments();
-            return m;
+            return Context.Movies.Include(m => m.Comments).First(m => m.Id == id);
         }
     }
 }

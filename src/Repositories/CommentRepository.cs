@@ -12,10 +12,5 @@ namespace MvcMovie.Repositories
         {
             context.Movies.Include(m => m.Comments);
         }
-
-        public MvcMovieContext MvcMovieContext
-        {
-            get { return Context as MvcMovieContext; }
-        }
     }
 }

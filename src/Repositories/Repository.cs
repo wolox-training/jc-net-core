@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MvcMovie.Models;
 using MvcMovie.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ namespace MvcMovie.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext Context;
+        protected readonly MvcMovieContext Context;
 
-        public Repository(DbContext context)
+        public Repository(MvcMovieContext context)
         {
             Context = context;
         }
